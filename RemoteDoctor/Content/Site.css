@@ -22,3 +22,18 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* for image slides */
+.carousel-div{
+    margin-top: 15px;
+}
+
+.slides-image{
+    width: 1000px;
+    margin-left: 80px;
+}
+
+#image-height{
+    height: 300px;
+}
+/* //for image slides */
