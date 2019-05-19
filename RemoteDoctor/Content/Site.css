@@ -60,3 +60,12 @@ textarea {
     height: 300px;
 }
 /* //for image slides */
+
+/*Validation error*/
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+}

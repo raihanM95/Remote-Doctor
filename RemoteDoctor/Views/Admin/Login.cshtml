@@ -1,0 +1,68 @@
+﻿@using RemoteDoctor.Models
+@model Admin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <!-- meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Art Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates,
+		Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <!-- /meta tags -->
+    <!-- custom style sheet -->
+    <link href="~/Content/Login/style.css" rel="stylesheet" type="text/css" />
+    <!-- /custom style sheet -->
+    <!-- fontawesome css -->
+    <link href="~/Content/Login/fontawesome-all.css" rel="stylesheet" />
+    <!-- /fontawesome css -->
+    <!-- google fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- /google fonts-->
+</head>
+
+<body>
+    <h1></h1>
+    <div class="w3l-login-form">
+        <h2>Login Here</h2>
+        @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="w3l-form-group">
+                <label>Admin Id:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    @Html.EditorFor(m => m.Id, new { htmlAttributes = new { @class = "form-control", required = "Id required", @placeholder = "Enter your id" } })
+                </div>
+                @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
+            </div>
+            <div class="w3l-form-group">
+                <label>Password:</label>
+                <div class="group">
+                    <i class="fas fa-unlock"></i>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "Password required", @placeholder = "Enter password" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="forgot">
+                <a href="#">@Html.ActionLink("Forgot Password?", "ForgotPassword", "Admin")</a>
+                <p></p>
+            </div>
+            <p class="login-validation">@ViewBag.ErrorMessage</p>
+            <button type="submit">Login</button>
+        }
+        <p class="w3l-register-p"></p>
+    </div>
+    <footer>
+        <p class="copyright-agileinfo"> &copy; @DateTime.Now.Year - Remote Doctor. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
