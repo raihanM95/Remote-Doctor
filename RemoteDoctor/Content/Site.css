@@ -23,6 +23,29 @@ textarea {
     max-width: 280px;
 }
 
+/* navbar color */
+.navbar {
+    background-color: #18BC9C;
+    border-color: #18BC9C;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #000000;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #000000;
+}
+/* //navbar color */
+
 /* for image slides */
 .carousel-div{
     margin-top: 15px;
@@ -30,7 +53,7 @@ textarea {
 
 .slides-image{
     width: 1000px;
-    margin-left: 80px;
+    margin-left: 70px;
 }
 
 #image-height{
