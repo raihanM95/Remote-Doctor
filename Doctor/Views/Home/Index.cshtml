@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_nav")
+<style>
+    /* Make the image fully responsive */
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<div class="row">
+    <div class="col-md-9">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ul>
+
+            <!-- The slideshow -->
+            <div class="carousel slide">
+                <div class="carousel-item active">
+                    <img src="~/Image/Home_Page_Banner.jpg" alt="Los Angeles" width="100%" height="450">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Image/banner-img5.jpg" alt="Chicago" width="100%" height="450">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Image/1.jpg" alt="New York" width="100%" height="450">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col">
+        @Html.Partial("~/Views/Patient/Login.cshtml")
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-md mt-xl-5">
+            <img src="~/Image/Work.PNG" />
+        </div>
+        <div class="col-md mt-xl-5">
+            <h3 class="text-center">About</h3>
+            <p class="p-lg-4">
+                Simple Online Doctor is an Australian online doctor service where you can reorder your scripts online after completing an online assessment. Our doctors are Australian registered professionals and look to make sure that what they prescribe is safe and effective for your condition.
+
+                When you complete any online consultation, it’s important you provide us with detailed and honest answers. Just like with a normal doctor appointment, we can only make sure the treatment is safe for you if you give us accurate answers about your health and current medications.
+
+                This service is complementary to your own GP’s services and not a replacement.
+            </p>
+        </div>
+    </div>
+</div>

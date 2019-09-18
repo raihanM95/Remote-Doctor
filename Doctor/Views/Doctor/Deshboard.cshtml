@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <div class="row pt-md-5">
+        <div class="col-md">
+            <div class="card text-white bg-danger rounded-0">
+                <div class="card-body">
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/23d8190d41/dhaka/" data-label_1="DHAKA" data-label_2="WEATHER" data-font="Roboto" data-mode="Current" data-days="3" data-textcolor="#fff">DHAKA WEATHER</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card text-white bg-danger rounded-0">
+                <div class="card-body">
+                    <div class="col-md">
+                        <h1 class="time" id="txt"></h1>
+                    </div>
+                    <div class="col-md">
+                        <p class="time" id="secound"></p>
+                        <p id="date" class="float-xl-right" style="margin-bottom: 33px;"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card text-white bg-danger rounded-0">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    !function (d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://weatherwidget.io/js/widget.min.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'weatherwidget-io-js');
+    window.setInterval(function () {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var date = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() + "," + days[today.getDay()];
+        document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+        document.getElementById('date').innerHTML = date;
+        var t = setTimeout(startTime, 500);
+    }, 1000);
+
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+    }
+</script>

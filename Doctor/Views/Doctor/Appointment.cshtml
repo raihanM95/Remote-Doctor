@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Doctor.Models.Appointment>
+<div class="row">
+    <div class="col-md p-xl-4 shadow-lg p-3 mb-5 bg-white rounded ml-xl-5 mt-xl-3">
+        <table class="table table-hover">
+            <tr>
+                <th>Patient Name</th>
+                <th>Problem</th>
+                <th>Blood Pressure</th>
+                <th>Previous  Medicine</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            @foreach (var a in Model)
+            {
+                string problem = a.Problem.Length < 40 ? a.Problem : a.Problem.Substring(0, 40);
+                <tr onclick="">
+                    <td>@a.Patient.PatientName</td>
+                    <td>@problem</td>
+                    <td>@a.BP</td>
+                    <td>@a.RunningMedicine</td>
+                    <td>
+                        @if (a.Status == false)
+                        {
+                            <span class="badge badge-danger">Not done</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-success">Success</span>
+                        }
+                    </td>
+                    @if (a.Status == false)
+                    {
+                        <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Prescription","Doctor",new {@id=a.Id})'">Solution</button></td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md p-xl-4 shadow-lg p-3 mb-5 bg-white rounded ml-xl-5 mt-xl-3">
+
+    </div>
+</div>

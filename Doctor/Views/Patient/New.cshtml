@@ -1,0 +1,86 @@
+﻿
+@model Doctor.Models.Patient
+
+@{
+    ViewBag.Title = "New";
+}
+@Html.Partial("_nav")
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <h1></h1>
+        </div>
+        <div class="col-md-6">
+            @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+            {
+                if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success">
+                        <p><strong>Success!  </strong>@ViewBag.Message</p>
+                    </div>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal justify-content-xl-center">
+                        <h4 class="text-center pr-xl-5 ">WELCOME!</h4>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group col-auto">
+                            @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-auto">
+                            @Html.LabelFor(model => model.PatientEmail, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PatientEmail, "", new { @class = "text-danger" })
+                                @Html.ValidationMessage("EmailExist")
+                            </div>
+                        </div>
+
+                        <div class="form-group col-auto">
+                            @Html.LabelFor(model => model.PatientPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PatientPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PatientPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-auto">
+                            @Html.LabelFor(model => model.PatientConfirmPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PatientConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @Html.HiddenFor(model => model.Id)                       
+                        <div class="form-group col-auto">
+                            <div class="col-md-10 text-center ">
+                                <input type="submit" value="Start" class="btn btn-outline-success btn-block" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>@ViewBag.Message
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md">
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

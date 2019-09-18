@@ -1,0 +1,26 @@
+﻿<div class="container" ng-controller="DoctorController">
+    <h2 class="h1 text-center pt-lg-5">SEARCH DOCTOR</h2>
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">
+                <img src="~/Image/baseline_search_black_24dp.png" />
+            </span>
+        </div>
+        <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" ng-model="Search.doctorName">
+    </div>
+    <br />
+    <br />
+    <div class="row" id="DataSearching">
+        <div class="col p-4" ng-repeat="d in Doctor | filter:Search | orderBy:'Name'">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top" src="{{d.DoctorImagePath}}" alt="Card image cap">
+                <div class="card-body">
+
+                    <h5 class="card-title">{{d.DoctorName | uppercase}}</h5>
+                    <p class="card-text">{{d.DoctorDegree}}</p>
+                    <a class="btn btn-outline-success mx-auto d-block" ng-href="@Url.Action("Apointment","Patient")/{{d.Id}}">Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

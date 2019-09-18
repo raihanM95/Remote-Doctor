@@ -1,0 +1,90 @@
+﻿@model Doctor.Models.Patient
+<div class="container">
+    <div class="row">
+        <div class="col-10 pt-md-5">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body ">
+                    @{
+                        string url;
+                        if (Model.PatientImagePath != null)
+                        {
+                            url = Model.PatientImagePath;
+                        }
+                        else
+                        {
+                            url = "/Image/user.jpg";
+                        }
+                    }
+                    <img src="@Url.Content(url)" class="mx-auto d-block shadow-lg p-3 mb-5 bg-white rounded"
+                         style="height: 150px; width: 150px;" alt="Not Available"/>
+                    <div class="row text-center">
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Name</li>
+                                <li class="list-group-item">Email</li>
+                                <li class="list-group-item">Phone</li>
+                                <li class="list-group-item">Birthdate</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@Model.PatientName</li>
+                                <li class="list-group-item">@Model.PatientEmail</li>
+                                <li class="list-group-item">@Model.PatientPhone</li>
+                                <li class="list-group-item">@Model.PatientBirthDate</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row pt-md-5">
+                        <div class="col-md">
+                            <input onclick="Getdata(@Model.Id)" type="submit" value="Update Information" class="btn mx-auto d-block btn-outline-success" data-toggle="modal" data-target="#EditeModal"/>
+                        </div>
+                        <div class="col-md">
+                            <button class="btn mx-auto d-block btn-outline-danger">Reset Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EditeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" data-dismiss="modal" class="close">&times;</a>
+                    <h1 id="ModalTitle"></h1>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Update", "Patient", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(p => p.Id, new { @id = "Pid" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.PatientName, new { @class = "form-control", @placeholder = "Enter Name" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.PatientEmail, new { @class = "form-control", @placeholder = "Enter Email" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.BloodGroup, new { @class = "form-control", @placeholder = "Enter Blood Group" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.PatientPhone, new { @class = "form-control", @placeholder = "Enter Phone number" })
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="BirthDate" placeholder="Birthdate" type="Date" value="@Model.PatientBirthDate">
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PatientImagePath)
+                            <input type="file" class="form-control-file" id="Imagefile" name="Imagefile" value="@Model.PatientImagePath">
+                            @Html.ValidationMessageFor(model => model.PatientImagefile, "", new { @class = "text-danger" })
+                        </div>                    
+                        <button class="btn btn-outline-success" type="submit">Save</button>
+                    }
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

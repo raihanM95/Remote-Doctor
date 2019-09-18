@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Doctor.Models.Report>
+<div class="container">
+    <div class="row">
+        <div class="col-md shadow-lg p-3 mb-2 bg-white rounded">
+            <table class="table ">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var re in Model)
+                {
+                    <tr>
+                        <td>@re.TestName</td>
+                        <td>@re.Description</td>
+                        <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("ReportSubmit","Patient",new {@id=re.Id})'">Solution</button></td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>

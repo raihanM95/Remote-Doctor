@@ -1,0 +1,109 @@
+﻿@model Doctor.Models.Patient
+<div class="SlideBar">
+    @{
+        var url = Model.PatientImagePath ?? "~/Image/user.jpg";
+    }
+    <div class="Profile">
+        <img src="@Url.Content(url)" class="mx-auto d-block"/>
+        <h4>@Model.PatientName</h4>
+        <p>@Model.PatientPhone</p>
+        <p>@Model.PatientEmail</p>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li id="dashboard">
+                <span class="pr-md-4">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                </span>Dashboard
+            </li>
+            <li id="profile">
+                <span class="pr-md-4">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span>Profile
+            </li>
+            <li id="appointment">
+                <span class="pr-md-4">
+                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                </span>Appointment
+            </li>
+            <li id="reports">
+                <span class="pr-md-4">
+                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                </span>Reports
+            </li>
+            <li id="prescription">
+                <span class="pr-md-4">
+                    <i class="fa fa-stethoscope" aria-hidden="true"></i>
+                </span>Prescription
+            </li>
+            <li id="history">
+                <span class="pr-md-4">
+                    <i class="fa fa-history" aria-hidden="true"></i>
+                </span>Chat
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        @using (Html.BeginForm("Logout", "Patient", FormMethod.Post))
+        {
+            <button class="btn btn-danger btn-outline-danger" type="submit">Logout</button>
+        }
+    </div>
+</div>
+<div class="containerrr">
+    <div class="_nav">
+        <div class="Slidetoogle" style="color: black;">
+            <svg width="30" height="30">
+                <path d="M0,5 30,5" stroke="black" stroke-width="5"/>
+                <path d="M0,14 30,14" stroke="black" stroke-width="5"/>
+                <path d="M0,23 30,23" stroke="black" stroke-width="5"/>
+            </svg>
+        </div>
+
+    </div>
+    <div class="bodyy">
+        <div id="loadPartial"></div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        var url = '@Url.Action("Deshboard", "Patient")';
+        $("#loadPartial").load(url);
+
+        $(".Slidetoogle").click(function() {
+            $(".SlideBar").toggleClass("active");
+            $(".containerrr").toggleClass("duck");
+
+        });
+       
+        $("#dashboard").click(function () {
+            var url= '@Url.Action("Deshboard", "Patient")';
+            $("#loadPartial").load(url);
+        });
+
+        $("#profile").click(function () {
+            var url= '@Url.Action("Profile", "Patient")';
+            $("#loadPartial").load(url);
+        });
+        $("#prescription").click(function () {
+            var url= '@Url.Action("Perescription", "Patient")';
+            $("#loadPartial").load(url);
+        });
+        $("#reports").click(function () {
+            var url= '@Url.Action("Reports", "Patient")';
+            $("#loadPartial").load(url);
+        });
+        $("#history").click(function () {
+            var url= '@Url.Action("History", "Patient")';
+            $("#loadPartial").load(url);
+        });
+        $("#appointment").click(function () {
+            var url= '@Url.Action("Appointment", "Patient")';
+            $("#loadPartial").load(url);
+        });
+    });
+</script>
+<link href="~/Content/Deshboard.css" rel="stylesheet"/>

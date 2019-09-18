@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "VarifyAccount";
+}
+@Html.Partial("_nav")
+<div class="row mt-xl-3">
+    <div class="col-md"></div>
+    <div class="col-md text-center">
+        @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+        {
+            <div class="alert alert-success">
+                <p><strong>Congress!</strong>@ViewBag.Message</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                <p><strong>Sorry! </strong>@ViewBag.Message</p>
+            </div>
+        }
+        @using (Html.BeginForm("Login","Patient"))
+        {
+            <button class="btn btn-outline-success btn-block"> Login Here</button>
+        }
+    </div>
+    <div class="col-md"></div>
+</div>
+

@@ -1,0 +1,123 @@
+﻿@model Doctor.Models.Doctors
+@if (Request.Cookies["Doctor"] != null)
+{
+    <div class="SlideBar">
+        @{
+            string url;
+            if (Model.DoctorImagePath != null)
+            {
+                url = Model.DoctorImagePath;
+            }
+            else
+            {
+                url = "/Image/user.jpg";
+            }
+        }
+        <div class="Profile">
+            <img src="@Url.Content(url)" class="mx-auto d-block"/>
+            <h4>@Model.DoctorName</h4>
+            <p>@Model.DoctorEmail</p>
+
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li id="dashboard">
+                    <span class="pr-md-4">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    </span>Dashboard
+                </li>
+                <li id="profile">
+                    <span class="pr-md-4">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>Profile
+                </li>
+                <li id="Patient">
+                    <span class="pr-md-4">
+                        <i class="fa fa-stethoscope" aria-hidden="true"></i>
+                    </span>Patient
+                </li>
+                <li id="appointment">
+                    <span class="pr-md-4">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                    </span>Appointment
+                </li>
+                <li id="history">
+                    <span class="pr-md-4">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                    </span>History
+                </li>
+                <li id="Chat">
+                    <span class="pr-md-4">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                    </span>Chat
+                </li>
+            </ul>
+        </div>
+        <div class="logout">
+            @using (Html.BeginForm("Logout", "Doctor", FormMethod.Post))
+            {
+                <button class="btn btn-danger btn-outline-danger" type="submit">Logout</button>
+            }
+        </div>
+    </div>
+    <div class="containerrr">
+        <div class="_nav">
+            <div class="Slidetoogle" style="color: black;">
+                <svg width="30" height="30">
+                    <path d="M0,5 30,5" stroke="black" stroke-width="5" />
+                    <path d="M0,14 30,14" stroke="black" stroke-width="5" />
+                    <path d="M0,23 30,23" stroke="black" stroke-width="5" />
+                </svg>
+            </div>
+
+        </div>
+        <div class="bodyy">
+            <div id="loadPartial"></div>
+        </div>
+
+    </div>
+    <script>
+    $(document).ready(function () {
+        var url = '@Url.Action("Deshboard", "Doctor")';
+        $("#loadPartial").load(url);
+
+        $(".Slidetoogle").click(function() {
+            $(".SlideBar").toggleClass("active");
+            $(".containerrr").toggleClass("duck");
+
+        });
+
+        $("#dashboard").click(function () {
+            var url= '@Url.Action("Deshboard", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+
+        $("#profile").click(function () {
+            var url= '@Url.Action("Profile", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+        $("#Patient").click(function () {
+            var url= '@Url.Action("Patient", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+        $("#history").click(function () {
+            var url= '@Url.Action("History", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+        $("#appointment").click(function () {
+            var url= '@Url.Action("Appointment", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+        $("#Chat").click(function () {
+            var url= '@Url.Action("Chat", "Doctor")';
+            $("#loadPartial").load(url);
+        });
+    });
+    </script>
+    <link href="~/Content/Deshboard.css" rel="stylesheet" />
+}
+else
+{
+    Response.Redirect("login");
+}

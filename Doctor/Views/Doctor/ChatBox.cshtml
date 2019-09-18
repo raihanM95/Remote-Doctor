@@ -1,0 +1,125 @@
+﻿@model Doctor.ViewModel.ChatViewForDoctor
+@{
+    ViewBag.Title = "ChatBox";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto d-block mt-xl-3">
+            <div class="row">
+                <div class="col-md-4  shadow-lg p-3 mb-1 bg-white rounded">
+                    <table class="table table-hover">
+                        <thead>
+
+                            <h4>Patient List</h4>
+
+                        </thead>
+                        @foreach (var p in Model.Patient)
+                        {
+                            <tr>
+                                <td id="Patient" data-id="@p.PatientEmail" onclick="SelectPatient('@p.PatientEmail');">
+                                    <div class="row">
+                                        @{
+                                            string url;
+                                            if (p.PatientImagePath != null)
+                                            {
+                                                url = p.PatientImagePath;
+                                            }
+                                            else
+                                            {
+                                                url = "/Image/user.jpg";
+                                            }
+                                        }
+                                        <div class="col-md-4">
+                                            <img src="@Url.Content(url)" class="img-thumbnail"/>
+                                        </div>
+                                        <div class="col-md-8">@p.PatientName</div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="col-md-8  shadow-lg p-3 mb-1 bg-white rounded">
+
+                    <div class="col-md-12" id="BOX" style=" overflow-y: scroll; overflow-x: hidden; height: 400px; transform: rotate(180deg); direction: rtl;">
+                        <div class="col-md" id="msg">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-xl-3">
+                        <div class="form-row">
+                            <div class="col-10">
+                                @Html.TextAreaFor(c => c.Chat.MessageText, new { @class = "form-control", @style = "resize: none", @rows = "2", @placeholder = "Write your message.." })
+                            </div>
+                            <div class="col">
+                                <input type="submit" id="SendBtn" class="btn btn-outline-success" rows="2" value="SEND" style="line-height: 3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var id;
+    function SelectPatient(e) {
+        $("#msg").empty();
+        id = e;
+        var counter = 0;
+        setInterval(function () {                     
+            $.ajax({
+                url: "/Doctor/GetMeeage/",
+                type: "GET",
+                data: {
+                    id:id
+                },
+                success: function (data) {
+                    
+                    data = JSON.parse(data);
+                    if (Object.keys(data).length > counter) {
+                        $("#msg").empty();
+                        data.forEach(function (d) {
+                        
+                            var msg = null;
+                            var sender ="@Model.Doctors.DoctorEmail";
+                            if (d.Sender == sender) {
+                                msg = '<p class="bg-primary p-xl-2 rounded text-white float-left" style="transform: rotate(180deg); direction: rtl;">' + d.MessageText + '</p><br><br><br>';
+                            } else {
+                                msg = '<p class="bg-success p-xl-2 rounded text-white float-right" style="transform: rotate(180deg); direction: ltr;">' + d.MessageText + '</p><br><br><br>';
+                            }                       
+                            $("#msg").append(msg);
+                        
+                        });
+                    }
+                    counter = Object.keys(data).length ;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+            
+        }, 1000);       
+    }
+    $("#SendBtn").on("click",
+        function(e) {
+            //e.preventDefault();                   
+            $.ajax({
+                url: "@Url.Action("SendMessage","Doctor")",
+                type: "POST",
+                data: {
+                    MessageText: $("#Chat_MessageText").val(),
+                    Reciver: id
+                },
+                success: function(data) {
+
+                    $("#Chat_MessageText").val('').focus();
+
+                },
+                error: function(error) {
+                    alert("Can't send message now!");
+                }
+            });
+        });
+</script>

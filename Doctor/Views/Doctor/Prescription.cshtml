@@ -1,0 +1,192 @@
+﻿@using System.Collections
+@using System.Web.UI.WebControls
+@using Doctor.Models
+@model Doctor.ViewModel.SloliutionView
+@{
+    /**/
+
+    ViewBag.Title = "Prescription";
+}
+@Html.Partial("_nav")
+
+<div class="container-fluid ml-md-4 pr-xl-5">
+    <div class="row">
+        <div class="col-md-4 mt-xl-5 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="row">
+                <div class="col-md-2 shadow-lg p-3 mb-5 bg-white rounded">
+                    @{
+                        var url = Model.Appointment.Patient.PatientImagePath ?? "~/Image/user.jpg";
+                    }
+                    <img src="@Url.Content(url)" class="img-fluid" alt="Not found">
+                </div>
+                <div class="col  shadow-lg p-3 mb-5 bg-white rounded">
+                    <h3 class="h4"><b>@Model.Appointment.Patient.PatientName</b></h3>
+                    <p>
+                        @Model.Appointment.Patient.PatientPhone <br />@Model.Appointment.Patient.PatientEmail<br />
+                    </p>
+
+
+                    <img src="~/Image/like (1).png" /><b class="h4 pr-xl-5 pl-xl-3">@Model.Appointment.BP</b>
+                    <img src="~/Image/scale (1).png" /><b class="h4 pr-xl-5  pl-xl-3">@Model.Appointment.Weight</b>
+                    <img src="~/Image/medicine.png" />@if (Model.Appointment.RunningMedicine == true)
+                    {
+                        <span class="badge badge-success ml-xl-3"><h5 class="h5 ">YES</h5></span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger  ml-xl-3">NO</span>
+                    }
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <h2>Problem</h2>
+                    <b><p>@Model.Appointment.Problem</p></b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 shadow-lg p-3 mb-5 bg-white rounded mt-xl-5">
+            <div class="row">
+                <div class="col-md-3 shadow-lg p-3 mb-1 bg-white rounded">
+                    <h3 class="h3">NEW MEDICINE</h3>
+                    @using (Html.BeginForm("AddMedicine", "Doctor", new { id = @Model.Appointment.Id }, FormMethod.Post, new { @id = "addMedicine", @class = "form-group" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.TextBoxFor(m => m.Medicine.Name, new { @class = "form-control mb-2 mr-sm-2", @placeholder = "Medicine name" })
+                        @Html.TextBoxFor(m => m.Medicine.Amount, new { @class = "form-control mb-1 mr-sm-2", @placeholder = "MG/ML", @type = "number" })
+                        @Html.TextBoxFor(m => m.Medicine.Dose, new { @class = "form-control mb-2 mr-sm-2", @placeholder = "Dose", @type = "number" })
+                        @Html.TextBoxFor(m => m.Medicine.Day, new { @class = "form-control mb-2 mr-sm-2", @placeholder = "Day", @type = "number" })
+                        @Html.TextBoxFor(m => m.Medicine.Comment, new { @class = "form-control mb-2 mr-sm-2", @placeholder = "Comment" })
+                        @Html.HiddenFor(m => m.Medicine.AppointmentId, new { @value = Model.Appointment.Id })
+                        <button type="submit" class="btn btn-outline-success mx-auto d-block">Add Medicine</button>
+                    }
+                </div>
+                <div class="col-md-3 shadow-lg p-3 mb-1 bg-white rounded">
+                    <h3 class="h3">MEDICAL TEST</h3>
+                    @using (Html.BeginForm("AddTest", "Doctor", new { id = Model.Appointment.Id }, FormMethod.Post, new { @id = "addTest", @class = "form-group" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.TextBoxFor(m => m.Report.TestName, new { @class = "form-control mb-2 mr-sm-2", @placeholder = "Test name" })
+                        @Html.TextAreaFor(m => m.Report.Description, new { @class = "form-control", @placeholder = "Test description", @rows = "7" })
+                        <button type="submit" class="btn btn-outline-success mx-auto d-block mt-3">Add Test</button>
+                    }
+                </div>
+                <div class="col-md-6 shadow-lg p-3 mb-1 bg-white rounded">
+                    <h3 class="h3 text-center">ADVICE</h3>
+                    @using (Html.BeginForm("AddPrescription", "Doctor", new { id = Model.Appointment.Id }, FormMethod.Post, new { @id = "AddPrescription", @class = "form-group" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.TextAreaFor(m => m.Prescription.Advice, new { @class = "form-control", @placeholder = "Test description", @rows = "9", @required = "true" })
+                        <button type="submit" class="btn btn-outline-success mx-auto d-block mt-3">Advice</button>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+
+        <table class="table table-hover">
+            <tr>
+                <th> Reports</th>
+            </tr>
+            @{
+               
+                foreach (var r in ViewBag.Report as IEnumerable<Report>)
+                {
+                    var x = r.ImagePath ?? "/Image/user.jpg";
+                    <tr>
+                        <td>
+                            
+                                <img src="@Url.Content(x)" alt=""/>
+                            
+                        </td>
+
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+    <div class="col-md-1 mx-auto d-lg-block mb-xl-5">
+        @using (Html.BeginForm("Solution", "Doctor", new { id = Model.Appointment.Id }, FormMethod.Post, new { @class = "" }))
+        {
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#addMedicine").on("submit",
+            function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: this.action,
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data == "Success!") {
+                            $.notify(data, "success");
+                            $('#addMedicine').each(function () {
+                                this.reset();
+                            });
+                        }
+                        else {
+                            $.notify(data, "error");
+                        }
+                    }
+                });
+            });
+
+        $("#addTest").on("submit",
+            function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: this.action,
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data == "Success!") {
+                            $.notify(data, "success");
+                            $('#addTest').each(function () {
+                                this.reset();
+                            });
+                        }
+                        else {
+                            $.notify(data, "error");
+                        }
+                    }
+                });
+            });
+
+        $("#AddPrescription").on("submit",
+            function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: this.action,
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data == "Success!") {
+                            $.notify(data, "success");
+                            $('#AddPrescription').each(function () {
+                                this.reset();
+                            });
+                        }
+                        else {
+                            $.notify(data, "error");
+                        }
+                    }
+                });
+            });
+    });
+</script>
+<link href="~/Content/lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/lightbox.js"></script>
+<script src="~/Scripts/Notification/notify.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Doctor.Models.Patient>
+<div class="container text-center">
+    <h3 class="mt-xl-3">Patient List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.PatientName</td>
+                <td>@p.PatientEmail</td>
+                <td>@p.PatientPhone</td>
+            </tr>
+        }
+    </table>
+</div>
+
