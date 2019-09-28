@@ -53,6 +53,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Mail, Version=3.0.19162.1801, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mail.dll.3.0.19162.1801\lib\net45\Mail.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -167,6 +170,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -174,7 +178,12 @@
     <Compile Include="Migrations\201909180839259_Doctor_Patient.Designer.cs">
       <DependentUpon>201909180839259_Doctor_Patient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909181950512_Admin.cs" />
+    <Compile Include="Migrations\201909181950512_Admin.Designer.cs">
+      <DependentUpon>201909181950512_Admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Security\Crypto.cs" />
     <Compile Include="DatabaseContext\DataContex.cs" />
     <Compile Include="Security\Email.cs" />
@@ -202,6 +211,7 @@
     <Compile Include="ViewModel\ChatViewForDoctor.cs" />
     <Compile Include="ViewModel\ChatViewForPatient.cs" />
     <Compile Include="ViewModel\DoctorView.cs" />
+    <Compile Include="ViewModel\DoctorViewModel.cs" />
     <Compile Include="ViewModel\PrescriptonView.cs" />
     <Compile Include="ViewModel\SloliutionView.cs" />
   </ItemGroup>
@@ -1364,6 +1374,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Patient\ReportSubmit.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Deshboard.cshtml" />
+    <Content Include="Views\Doctor\Doctors.cshtml" />
+    <Content Include="Views\Patient\Patients.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
@@ -1384,6 +1399,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909180839259_Doctor_Patient.resx">
       <DependentUpon>201909180839259_Doctor_Patient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181950512_Admin.resx">
+      <DependentUpon>201909181950512_Admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

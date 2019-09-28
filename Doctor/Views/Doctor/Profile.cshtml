@@ -21,28 +21,78 @@
                         <div class="col">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Name</li>
+                                <li class="list-group-item">Date of Birth</li>
                                 <li class="list-group-item">Email</li>
-                                <li class="list-group-item">Registration no</li>
-                                <li class="list-group-item">Birthdate</li>
+                                <li class="list-group-item">Registration No</li>
+                                <li class="list-group-item">Degree</li>
+                                @*<li class="list-group-item">Department</li>*@
+                                <li class="list-group-item">Details</li>
                             </ul>
                         </div>
                         <div class="col">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">@Model.DoctorName</li>
+                                <li class="list-group-item">@Model.DoctorBirthDate</li>
                                 <li class="list-group-item">@Model.DoctorEmail</li>
                                 <li class="list-group-item">@Model.RegNo</li>
-                                <li class="list-group-item">@Model.DoctorBirthDate</li>
+                                <li class="list-group-item">@Model.DoctorDegree</li>
+                                @*<li class="list-group-item">@Model.Department.DeptName</li>*@
+                                <li class="list-group-item">@Model.DoctorDetails</li>
                             </ul>
                         </div>
                     </div>
                     <div class="row pt-md-5">
                         <div class="col-md">
-                            <input  type="submit" value="Update Information" class="btn mx-auto d-block btn-outline-success" data-toggle="modal" data-target="#EditeModal" />
+                            <input onclick="Getdata(@Model.Id)" type="submit" value="Update Information" class="btn mx-auto d-block btn-outline-success" data-toggle="modal" data-target="#EditeModal" />
                         </div>
                         <div class="col-md">
                             <button class="btn mx-auto d-block btn-outline-danger">Reset Password</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EditeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="ModalTitle">Update Info</h4>
+                    <a href="#" data-dismiss="modal" class="close">&times;</a>
+
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Update", "Doctor", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(p => p.Id, new { @id = "Did" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.DoctorName, new { @class = "form-control", @placeholder = "Enter Name" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DoctorImagePath)
+                            <input type="file" class="form-control-file" id="Imagefile" name="DoctorImagefile" value="@Model.DoctorImagePath">
+                            @Html.ValidationMessageFor(model => model.DoctorImagefile, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="DoctorBirthDate" placeholder="Date of Birth" type="Date" value="@Model.DoctorBirthDate">
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.DoctorEmail, new { @class = "form-control", @placeholder = "Enter Email" })
+                        </div>
+                        @*<div class="form-group">
+                            @Html.TextBoxFor(p => p.RegNo, new { @class = "form-control", @placeholder = "Enter Reg No" })
+                        </div>*@
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.DoctorDegree, new { @class = "form-control", @placeholder = "Enter Degree" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.DoctorDetails, new { @class = "form-control", @placeholder = "Enter Details" })
+                        </div>
+                        <button class="btn btn-outline-success" type="submit">Save</button>
+                    }
+                </div>
+                <div class="modal-footer">
+
                 </div>
             </div>
         </div>

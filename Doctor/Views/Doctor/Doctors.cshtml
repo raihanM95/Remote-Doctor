@@ -1,0 +1,72 @@
+﻿@model Doctor.ViewModel.DoctorViewModel
+<p style="margin-top:20px; margin-left:20px">
+    <button class="btn btn-info" onclick="location.href='@Url.Action("New", "Doctor")'"><span class="fa fa-user-plus admin-action-icon"></span>Add Doctor</button>
+</p>
+<div class="container text-center">
+    <h3 class="mt-xl-3">Doctors List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Degree</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var dr in Model.Data)
+        {
+            <tr>
+                <td>@dr.DoctorName</td>
+                <td>@dr.DoctorEmail</td>
+                <td>@dr.DoctorDegree</td>
+                @*<td>
+                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "admin-action", onclick="Getdata(@dr.Id)", data_toggle="modal", data_target="#EditeModal" })</p>
+
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                </td>*@
+            </tr>
+        }
+    </table>
+</div>
+@*<div class="modal fade" id="EditeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Update Info</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Update", "Doctor", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.Doctors.Id, new { @id = "Did" })
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Doctors.DoctorName, new { @class = "form-control", @placeholder = "Enter Name" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Doctors.DoctorImagePath)
+                        <input type="file" class="form-control-file" id="Imagefile" name="DoctorImagefile" value="@Model.Doctors.DoctorImagePath">
+                        @Html.ValidationMessageFor(model => model.Doctors.DoctorImagefile, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="DoctorBirthDate" placeholder="Date of Birth" type="Date" value="@Model.Doctors.DoctorBirthDate">
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Doctors.DoctorEmail, new { @class = "form-control", @placeholder = "Enter Email" })
+                    </div>
+                    <div class="form-group">
+                            @Html.TextBoxFor(p => p.RegNo, new { @class = "form-control", @placeholder = "Enter Reg No" })
+                        </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Doctors.DoctorDegree, new { @class = "form-control", @placeholder = "Enter Degree" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Doctors.DoctorDetails, new { @class = "form-control", @placeholder = "Enter Details" })
+                    </div>
+                    <button class="btn btn-outline-success" type="submit">Save</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>*@

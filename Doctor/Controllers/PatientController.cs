@@ -39,18 +39,16 @@ namespace Doctor.Controllers
             return View(this.CurrentUser());
         }
 
-        // Crate Account
         [HttpGet]
         public ActionResult New()
         {
             return View();
         }
 
-        // Crate Account
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(
-            [Bind(Exclude = "EmailIsVerifed,ActivationCode")]
+            [Bind(Exclude = "IsEmailVerified,ActivationCode")]
             Patient patient)
         {
             ModelState["Id"].Errors.Clear();
@@ -58,7 +56,7 @@ namespace Doctor.Controllers
             bool Status = false;
             if (!ModelState.IsValid)
             {
-                Message = "Ivalide Request";
+                Message = "Invalid Request";
                 return View();
             }
             else
@@ -71,7 +69,7 @@ namespace Doctor.Controllers
                         return View();
                     }
 
-                    #region Generate unique Id
+                    #region Generate Activation Code
 
                     patient.ActivationCode = Guid.NewGuid();
 
@@ -111,7 +109,6 @@ namespace Doctor.Controllers
             return View();
         }
 
-        // Check Email existence
         [NonAction]
         public bool IsEmailExist(string Email)
         {
@@ -119,7 +116,6 @@ namespace Doctor.Controllers
             return e != null;
         }
 
-        // Verify Account
         [HttpGet]
         public ActionResult VarifyAccount(string id)
         {
@@ -130,7 +126,6 @@ namespace Doctor.Controllers
             {
                 patient.IsEmailVarified = true;
 
-                // doctor.ActivationCode = null;
                 _contex.SaveChanges();
                 Status = true;
                 ViewBag.Message = "Your account has been successfully activated!";
@@ -141,20 +136,18 @@ namespace Doctor.Controllers
             }
             else
             {
-                ViewBag.Message = "Invalide request";
+                ViewBag.Message = "Invalid Request";
             }
 
             ViewBag.Status = Status;
             return View();
         }
 
-        // Login
         public ActionResult Login()
         {
             return this.View();
         }
 
-        // Login
         [HttpPost]
         public ActionResult Login(Login login, string ReturnUrl)
         {
@@ -168,7 +161,7 @@ namespace Doctor.Controllers
                 {
                     Status = true;
                     Session["Patient"] = patient.PatientEmail;
-                    int TimeOut = login.Remember ? 525600 : 20;
+                    int TimeOut = login.Remember ? 1440 : 720; // 1440 min = 1 day && 720 min= 12 hour
                     var tiket = new FormsAuthenticationTicket(login.Email, login.Remember, TimeOut);
                     string encrypts = FormsAuthentication.Encrypt(tiket);
                     var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypts);
@@ -187,12 +180,12 @@ namespace Doctor.Controllers
                 }
                 else
                 {
-                    Message = "Password is incorrect or Email is not Verified";
+                    Message = "Account is not verified or Password incorrect!";
                 }
             }
             else
             {
-                Message = "This email is not registerd";
+                Message = "This email is not registered";
             }
 
             ViewBag.Message = Message;
@@ -200,7 +193,6 @@ namespace Doctor.Controllers
             return View();
         }
 
-        // Logout
         [Authorize]
         public ActionResult Logout()
         {
@@ -209,7 +201,13 @@ namespace Doctor.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // Profile
+        public ActionResult Patients()
+        {
+            var Patient = this._contex.Patients.ToList();
+
+            return PartialView(Patient);
+        }
+
         [Authorize]
         [HttpGet]
         public ActionResult Profile()
@@ -219,13 +217,12 @@ namespace Doctor.Controllers
             return this.PartialView("Profile", patient);
         }
 
-        // Update Profile
         [HttpPost]
         public ActionResult Update(Patient patient)
         {
             var Patien = this._contex.Patients.Single(p => p.Id == patient.Id);
             ModelState["PatientPassword"].Errors.Clear();
-            ModelState["PatientConfPassword"].Errors.Clear();
+            ModelState["PatientConfirmPassword"].Errors.Clear();
             patient.PatientConfirmPassword = Patien.PatientPassword;
             patient.PatientPassword = Patien.PatientPassword;
             if (ModelState.IsValid)
@@ -245,19 +242,17 @@ namespace Doctor.Controllers
                 }
                 Patien.PatientName = patient.PatientName;
                 Patien.PatientPassword = patient.PatientPassword;
-                Patien.PatientConfirmPassword = patient.PatientConfirmPassword; ;
+                Patien.PatientConfirmPassword = patient.PatientConfirmPassword;
                 Patien.PatientEmail = patient.PatientEmail;
                 Patien.PatientPhone = patient.PatientPhone;
                 Patien.PatientBirthDate = patient.PatientBirthDate;
                 Patien.PatientImagePath = patient.PatientImagePath;
                 Patien.BloodGroup = patient.BloodGroup;
                 this._contex.SaveChanges();
-
             }
-            return RedirectToAction("Index", "Patient");
+            return RedirectToAction("Profile", "Patient");
         }
 
-        // Deshboard
         [Authorize]
         public ActionResult Deshboard()
         {
@@ -267,7 +262,6 @@ namespace Doctor.Controllers
             return this.PartialView();
         }
 
-        // Appointment:Select Doctor
         [Authorize]
         [HttpGet]
         public ActionResult Apointment(string id)
@@ -298,7 +292,6 @@ namespace Doctor.Controllers
             }
         }
 
-        // Appointment Submite
         [HttpPost]
         public ActionResult Apointment(Appointment appointment, int id, int pId)
         {
@@ -310,7 +303,7 @@ namespace Doctor.Controllers
                 this._contex.Appointments.Add(appointment);
                 this._contex.SaveChanges();
                 ViewBag.Status = true;
-                ViewBag.Message = "Appointment Complited ";
+                ViewBag.Message = "Appointment Completed";
                 return Redirect("~/patient");
             }
             else
@@ -331,7 +324,6 @@ namespace Doctor.Controllers
             return this.PartialView(appointments);
         }
 
-        // Reports
         [Authorize]
         public ActionResult Reports()
         {
@@ -348,7 +340,6 @@ namespace Doctor.Controllers
             return this.PartialView(Report);
         }
 
-        // Prescription
         [Authorize]
         public ActionResult Perescription()
         {
@@ -404,14 +395,12 @@ namespace Doctor.Controllers
             return null;
         }
 
-        // History
         [Authorize]
         public ActionResult History()
         {
             return Redirect("~/Patient/ChatBox");
         }
 
-        // Search Docotor
         [Authorize]
         [HttpPost]
         public JsonResult SearchDoctor(string search)

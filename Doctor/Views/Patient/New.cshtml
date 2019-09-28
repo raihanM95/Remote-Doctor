@@ -26,8 +26,8 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal justify-content-xl-center">
-                        <h4 class="text-center pr-xl-5 ">WELCOME!</h4>
+                    <div class="form-horizontal">
+                        <h3 class="text-center">WELCOME!</h3>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group col-auto">
                             @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -60,13 +60,14 @@
                                 @Html.ValidationMessageFor(model => model.PatientConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        @Html.HiddenFor(model => model.Id)                       
+                        @Html.HiddenFor(model => model.Id)
                         <div class="form-group col-auto">
                             <div class="col-md-10 text-center ">
-                                <input type="submit" value="Start" class="btn btn-outline-success btn-block" />
+                                <input type="submit" value="SignUp" class="btn btn-outline-success btn-block" />
                             </div>
                         </div>
                     </div>
+                    <div style="height:100px"></div>
                 }
                 if (ViewBag.Message != null)
                 {

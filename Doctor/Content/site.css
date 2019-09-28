@@ -29,3 +29,12 @@ textarea {
     border: 2px solid red;
 }
 
+.admin-back-icon {
+    margin-right: 4px;
+    color: #428bca;
+}
+
+.admin-action {
+    color: #fff;
+    text-decoration: none;
+}

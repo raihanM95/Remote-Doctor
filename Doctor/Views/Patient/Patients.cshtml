@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Doctor.Models.Patient>
+<p style="margin-top:20px; margin-left:20px">
+    <button class="btn btn-info" onclick="location.href='@Url.Action("New", "Patient")'"><span class="fa fa-user-plus admin-action-icon"></span>Add Patient</button>
+</p>
+<div class="container text-center">
+    <h3 class="mt-xl-3">Patients List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var pa in Model)
+        {
+            <tr>
+                <td>@pa.PatientName</td>
+                <td>@pa.PatientEmail</td>
+                <td>@pa.PatientPhone</td>
+                <td>
+                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink("Edit", "Edit", new { @*id = item.ID*@ }, new { @class = "admin-action" })</p>
+
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink("Delete", "Delete", new { @*id = item.ID*@ }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

@@ -8,6 +8,7 @@ using Doctor.Models;
 using Doctor.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
+using System.Web.Security;
 
 namespace Doctor.Controllers
 {
@@ -29,8 +30,8 @@ namespace Doctor.Controllers
         // GET: Doctor
         public ActionResult Index()
         {
-            var Doctor = this.GetCurrentDoctor();
-            if (Doctor != null)
+            var doctor = this.GetCurrentDoctor();
+            if (doctor != null)
             {
                 return View(GetCurrentDoctor());
             }
@@ -40,22 +41,29 @@ namespace Doctor.Controllers
             }
         }
 
-        // Crate Account
+        [HttpGet]
         public ActionResult New()
         {
-            ViewBag.Message = null;
-            ViewBag.Status = false;
+            var doctor = this.GetCurrentDoctor();
+            if (doctor == null)
+            {
+                ViewBag.Message = null;
+                ViewBag.Status = false;
 
-            var department = this._contex.Departments.ToList();
-            var doctorview = new DoctorView { Doctors = new Doctors(), Departments = department, };
-            return this.View(doctorview);
+                var department = this._contex.Departments.ToList();
+                var doctorview = new DoctorView { Doctors = new Doctors(), Departments = department, };
+                return this.View(doctorview);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Doctor");
+            }
         }
 
-        // Crate Account
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(
-            [Bind(Exclude = "IsEmailVarifide,ActivationCode")]
+            [Bind(Exclude = "IsEmailVerified,ActivationCode")]
             Doctors doctors)
         {
             bool Status = false;
@@ -77,7 +85,7 @@ namespace Doctor.Controllers
                         return this.View("New", ViewModel);
                     }
 
-                    #region Generate unique Id
+                    #region Generate Activation Code
 
                     doctors.ActivationCode = Guid.NewGuid();
 
@@ -144,7 +152,6 @@ namespace Doctor.Controllers
             return this.View();
         }
 
-        // Check Email existence
         [NonAction]
         public bool IsEmailExist(string Email)
         {
@@ -152,8 +159,6 @@ namespace Doctor.Controllers
             return e != null;
         }
 
-        // Verify Account
-        [HttpGet]
         public ActionResult VarifyAccount(string id)
         {
             bool Status = false;
@@ -175,21 +180,27 @@ namespace Doctor.Controllers
             }
             else
             {
-                this.ViewBag.Message = "Invalide request";
+                this.ViewBag.Message = "Invalid Request";
             }
 
             this.ViewBag.Status = Status;
             return View();
         }
 
-        // Login
         [HttpGet]
         public ActionResult Login()
         {
-            return this.View();
+            var doctor = this.GetCurrentDoctor();
+            if (doctor == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Doctor");
+            }
         }
 
-        // Login
         [HttpPost]
         public ActionResult Login(Login login)
         {
@@ -202,7 +213,7 @@ namespace Doctor.Controllers
                 if (string.Compare(Crypto.Hash(login.Password), doc.DoctorPassword) == 0 && doc.IsEmailVarified == true)
                 {
                     Status = true;
-                    int timeout = login.Remember ? 505600 : 20;
+                    int timeout = login.Remember ? 1440 : 720; // 1440 min = 1 day && 720 min= 12 hour
                     Session["Doctor"] = doc.DoctorEmail;
                     var cokie = new HttpCookie("Doctor", doc.DoctorEmail);
                     cokie.Expires = DateTime.Now.AddMinutes(timeout);
@@ -227,34 +238,24 @@ namespace Doctor.Controllers
             ViewBag.Status = Status;
         }
 
-        // Logout
         [HttpPost]
         public ActionResult Logout()
         {
-            var Doctor = this.GetCurrentDoctor();
-            if (Doctor != null)
-            {
-                Session.Clear();
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            Response.Cookies["Doctor"].Expires = DateTime.Now.AddDays(-1);
+            return RedirectToAction("Login", "Doctor");
+        }
 
-                // Session.Abandon();
-                if (Request.Cookies["Doctor"] != null)
-                {
-                    var c = new HttpCookie("Doctor");
-                    c.Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies.Add(c);
-                }
-
-                return RedirectToAction("Login", "Doctor");
-            }
-            else
-            {
-                return RedirectToAction("Login", "Doctor");
-            }
+        public ActionResult Doctors()
+        {
+            var Doctor = this._contex.Doctorses.ToList();
+            
+            return PartialView(Doctor);
         }
 
         public ActionResult Appointment()
         {
-
             var doctor = this.GetCurrentDoctor();
             if (doctor != null)
             {
@@ -284,42 +285,110 @@ namespace Doctor.Controllers
         {
             List<Patient> Pa = new List<Patient>();
             var doctor = this.GetCurrentDoctor();
-            var Patient = this._contex.Appointments.Include("Patient").Where(a => a.DoctorsId == doctor.Id).ToList();
-            foreach (var p in Patient)
+            if (doctor != null)
             {
-                Pa.Add(p.Patient);
-            }
+                var Patient = this._contex.Appointments.Include("Patient").Where(a => a.DoctorsId == doctor.Id).ToList();
+                foreach (var p in Patient)
+                {
+                    Pa.Add(p.Patient);
+                }
 
-            var past = Pa.Distinct();
-            return this.PartialView(past);
+                var past = Pa.Distinct();
+                return this.PartialView(past);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Doctor");
+            }
         }
 
-        // Profile
         public ActionResult Profile()
         {
             var doctor = this.GetCurrentDoctor();
-            return this.PartialView(doctor);
+            if (doctor != null)
+            {
+                return this.PartialView(doctor);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Doctor");
+            }
         }
 
-        // Deshboard
+        [HttpPost]
+        public ActionResult Update(Doctors doctor)
+        {
+            var Doctor = this._contex.Doctorses.Single(p => p.Id == doctor.Id);
+            ModelState["DoctorPassword"].Errors.Clear();
+            ModelState["DoctorConfirmPassword"].Errors.Clear();
+            ModelState["RegNo"].Errors.Clear();
+            doctor.DoctorBirthDate = Doctor.DoctorBirthDate;
+            doctor.RegNo = Doctor.RegNo;
+            doctor.DoctorPassword = Doctor.DoctorPassword;
+            doctor.DoctorConfirmPassword = Doctor.DoctorPassword;
+            doctor.DepartmentId = Doctor.DepartmentId;
+            if (ModelState.IsValid)
+            {
+                if (doctor.DoctorImagefile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(doctor.DoctorImagefile.FileName);
+                    string Extantion = Path.GetExtension(doctor.DoctorImagefile.FileName);
+                    fileName = fileName + DateTime.Now.Year + Extantion;
+                    doctor.DoctorImagePath = "/Image/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    doctor.DoctorImagefile.SaveAs(fileName);
+                }
+                else
+                {
+                    doctor.DoctorImagePath = Doctor.DoctorImagePath;
+                }
+                Doctor.DoctorName = doctor.DoctorName;
+                Doctor.DoctorImagePath = doctor.DoctorImagePath;
+                Doctor.DoctorBirthDate = doctor.DoctorBirthDate;
+                Doctor.DoctorEmail = doctor.DoctorEmail;
+                Doctor.DoctorDegree = doctor.DoctorDegree;
+                Doctor.RegNo = doctor.RegNo;
+                Doctor.DoctorDetails = doctor.DoctorDetails;
+                Doctor.DoctorPassword = doctor.DoctorPassword;
+                Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
+                Doctor.DepartmentId = doctor.DepartmentId;
+                this._contex.SaveChanges();
+            }
+            return RedirectToAction("Profile", "Doctor");
+        }
+
         public ActionResult Deshboard()
         {
-            var doc = this.GetCurrentDoctor();
-            var ap = this._contex.Appointments.Where(a => a.DoctorsId == doc.Id && a.Status == false);
-            return this.PartialView(ap);
+            var doctor = this.GetCurrentDoctor();
+            if (doctor != null)
+            {
+                var ap = this._contex.Appointments.Where(a => a.DoctorsId == doctor.Id && a.Status == false);
+                return this.PartialView(ap);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Doctor");
+            }
         }
 
         public ActionResult History()
         {
-            var doc = this.GetCurrentDoctor();
-            var ap = this._contex.Appointments.Where(a => a.DoctorsId == doc.Id && a.Status == false);
-            return this.PartialView(ap);
+            var doctor = this.GetCurrentDoctor();
+            if (doctor != null)
+            {
+                var ap = this._contex.Appointments.Where(a => a.DoctorsId == doctor.Id && a.Status == false);
+                return this.PartialView(ap);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Doctor");
+            }
         }
 
         public ActionResult Prescription(string id)
         {
-            var doc = this.GetCurrentDoctor();
-            if (doc != null)
+            var doctor = this.GetCurrentDoctor();
+            if (doctor != null)
             {
                 if (id == null)
                 {
@@ -350,8 +419,15 @@ namespace Doctor.Controllers
 
         private Doctors GetCurrentDoctor()
         {
-            string dName = this.Request.Cookies["Doctor"].Value;
-            return this._contex.Doctorses.Single(d => d.DoctorEmail == dName);
+            if (Request.Cookies.Get("Doctor") != null)
+            {
+                var dEmail = this.Request.Cookies["Doctor"].Value;
+                return this._contex.Doctorses.Single(d => d.DoctorEmail == dEmail);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         [HttpPost]
@@ -378,9 +454,8 @@ namespace Doctor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
         }
-        //Add new medical test
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddTest(Report report, string id)
@@ -468,7 +543,7 @@ namespace Doctor.Controllers
                     Patient = plist,
                     Chat = new Chat()
                 };
-                return this.View(chatView);
+                return this.PartialView(chatView);
             }
             else
             {

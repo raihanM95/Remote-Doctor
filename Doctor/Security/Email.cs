@@ -11,9 +11,9 @@ namespace Doctor
     {
         public static void SendVarificationEmail(string Email, string link)
         {            
-            var fromEmail = new MailAddress("hospital@gmail.com", "Hospital");
+            var fromEmail = new MailAddress("raihan35-1542@diu.edu.bd", "Hospital");
             var ToEmail = new MailAddress(Email);
-            var FormEmailPass = "*****";
+            var FormEmailPass = "1016237381";
             string Subject = "Your Account Successfully Created";
 
             string body = "<br><br><br><b>Welcome!!</b>  <br>" +

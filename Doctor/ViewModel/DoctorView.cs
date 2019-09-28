@@ -10,5 +10,6 @@ namespace Doctor.ViewModel
     {
         public IEnumerable<Department> Departments { get; set; }
         public Doctors Doctors { get; set; }
+        
     }
 }

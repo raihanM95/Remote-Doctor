@@ -16,22 +16,22 @@ namespace Doctor.Models
         [Display(Name = "Enter Doctor Name")]
         public string DoctorName { get; set; }
 
-        [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Date Of Birth")]
-        public DateTime DoctorBirthDate { get; set; }
-
-        [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        public string DoctorEmail { get; set; }
-
         [Display(Name = "Upload Image")]
         public string DoctorImagePath { get; set; }
 
         [NotMapped]
         [Required]
         public HttpPostedFileBase DoctorImagefile { get; set; }
+
+        [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Date of Birth")]
+        public DateTime DoctorBirthDate { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        public string DoctorEmail { get; set; }
 
         [Display(Name = "Degree")]
         [Required(AllowEmptyStrings = false)]
@@ -68,6 +68,7 @@ namespace Doctor.Models
 
         public Department Department { get; set; }
         [Display(Name = "Department")]
-        [Required] public int DepartmentId { get; set; }
+        [Required]
+        public int DepartmentId { get; set; }
     }
 }

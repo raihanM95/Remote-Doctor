@@ -16,9 +16,18 @@ namespace Doctor.Models
         [Display(Name = "Enter Name")]
         public string PatientName { get; set; }
 
+        [Display(Name = "Upload Image")]
+        public string PatientImagePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase PatientImagefile { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Date Of Birth")]
         public DateTime? PatientBirthDate { get; set; }
+
+        [Display(Name = "Blood Group")]
+        public string BloodGroup { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public string PatientPhone { get; set; }
@@ -27,15 +36,6 @@ namespace Doctor.Models
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string PatientEmail { get; set; }
-
-        [Display(Name = "Blood Group")]
-        public string BloodGroup { get; set; }
-
-        [Display(Name = "Upload Image")]
-        public string PatientImagePath { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase PatientImagefile { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [DataType(DataType.Password)]

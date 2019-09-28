@@ -1,12 +1,17 @@
 ﻿@model Doctor.Models.Login
 
-<div class="row">
-    <div class="col-md mx-auto d-block">
+@{
+    ViewBag.Title = "Login";
+}
+
+@Html.Partial("_nav")
+<div class="row mx-auto d-block">
+    <div class="col-md-4 mx-auto d-block">
         <div class="card shadow p-3 mb-5 bg-white rounded mt-3" style="width: 25rem;">
-       
-                <h4 class="text-center  ">Login</h4>
+
+            <h4 class="text-center  ">Login</h4>
             <div class="card-body">
-                @using (Html.BeginForm("Login", "Patient", FormMethod.Post))
+                @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
@@ -49,20 +54,19 @@
                     <div class="alert-danger rounded">
                         <a class="text-light">@ViewBag.Message</a>
                     </div>
-                    
+
                 }
-                <div class="text-center">
-                    <a class="text-center">@Html.ActionLink("Register here..", "New", "Patient")</a>
-                </div>
-                <div class="text-center">
-                    <a class="text-center">@Html.ActionLink("Are you doctor?", "Login", "Doctor")</a>
-                </div>
-                
+                @*<div class="text-center">
+                    <a class="text-center">@Html.ActionLink("Register here", "New", "Doctor")</a>
+                </div>*@
+
             </div>
-            
-        </div>        
+
+        </div>
     </div>
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

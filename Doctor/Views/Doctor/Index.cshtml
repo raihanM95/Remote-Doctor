@@ -39,7 +39,7 @@
                 </li>
                 <li id="appointment">
                     <span class="pr-md-4">
-                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
                     </span>Appointment
                 </li>
                 <li id="history">
@@ -47,9 +47,9 @@
                         <i class="fa fa-history" aria-hidden="true"></i>
                     </span>History
                 </li>
-                <li id="Chat">
+                <li id="chat">
                     <span class="pr-md-4">
-                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <i class="fa fa-comments" aria-hidden="true"></i>
                     </span>Chat
                 </li>
             </ul>
@@ -75,6 +75,7 @@
         <div class="bodyy">
             <div id="loadPartial"></div>
         </div>
+        <div style="height:1000px"></div>
 
     </div>
     <script>
@@ -109,7 +110,7 @@
             var url= '@Url.Action("Appointment", "Doctor")';
             $("#loadPartial").load(url);
         });
-        $("#Chat").click(function () {
+        $("#chat").click(function () {
             var url= '@Url.Action("Chat", "Doctor")';
             $("#loadPartial").load(url);
         });
