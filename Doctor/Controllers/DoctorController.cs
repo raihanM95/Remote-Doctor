@@ -9,6 +9,7 @@ using Doctor.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace Doctor.Controllers
 {
@@ -250,8 +251,79 @@ namespace Doctor.Controllers
         public ActionResult Doctors()
         {
             var Doctor = this._contex.Doctorses.ToList();
+            var department = this._contex.Departments.ToList();
             
-            return PartialView(Doctor);
+            var DrView = new DoctorView
+            {
+                Departments = department,
+                Doctorses = Doctor
+            };
+            return PartialView(DrView);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                int isExecuted = 0;
+
+                Doctors aDoctors = this._contex.Doctorses.FirstOrDefault(dr => dr.Id == id);
+                this._contex.Doctorses.Remove(aDoctors);
+                isExecuted = this._contex.SaveChanges();
+
+                if (isExecuted > 0)
+                {
+                    ViewBag.AlertMsg = "Delete Successfully";
+                }
+                return RedirectToAction("Doctors");
+            }
+            catch
+            {
+                return RedirectToAction("Doctors");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var department = this._contex.Departments.ToList();
+            Doctors aDoctors = this._contex.Doctorses.FirstOrDefault(dr => dr.Id == id);
+            
+            var DrView = new DoctorView
+            {
+                Departments = department,
+                Doctors = aDoctors
+            };
+            return PartialView(DrView);
+        }
+
+        public JsonResult Edit(int? id)
+        {
+            Doctors aDoctors = this._contex.Doctorses.FirstOrDefault(dr => dr.Id == id);
+            return Json(aDoctors, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Doctors doctors)
+        {
+            var department = this._contex.Departments.ToList();
+            var DrView = new DoctorView
+            {
+                Departments = department
+            };
+            var Doctor = this._contex.Doctorses.Single(p => p.Id == doctors.Id);
+            ModelState["DoctorPassword"].Errors.Clear();
+            ModelState["DoctorConfirmPassword"].Errors.Clear();
+            doctors.DoctorPassword = Doctor.DoctorPassword;
+            doctors.DoctorConfirmPassword = Doctor.DoctorPassword;
+            
+            if (ModelState.IsValid)
+            {
+                this._contex.Entry(doctors).State = EntityState.Modified;
+                this._contex.SaveChanges();
+                return RedirectToAction("Doctors");
+            }
+            return PartialView(DrView);
         }
 
         public ActionResult Appointment()

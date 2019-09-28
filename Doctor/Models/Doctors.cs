@@ -70,7 +70,5 @@ namespace Doctor.Models
         [Display(Name = "Department")]
         [Required]
         public int DepartmentId { get; set; }
-
-        public List<Doctors> Doctorses { get; set; }
     }
 }

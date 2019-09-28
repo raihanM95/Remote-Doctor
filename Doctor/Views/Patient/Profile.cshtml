@@ -65,9 +65,9 @@
                             @Html.TextBoxFor(p => p.PatientName, new { @class = "form-control", @placeholder = "Enter Name" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PatientImagePath)
+                            @Html.LabelFor(p => p.PatientImagePath)
                             <input type="file" class="form-control-file" id="Imagefile" name="PatientImagefile" value="@Model.PatientImagePath">
-                            @Html.ValidationMessageFor(model => model.PatientImagefile, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(p => p.PatientImagefile, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="PatientBirthDate" placeholder="Birthdate" type="Date" value="@Model.PatientBirthDate">
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             @Html.TextBoxFor(p => p.PatientPhone, new { @class = "form-control", @placeholder = "Enter Phone number" })
                         </div>
-                        <button class="btn btn-outline-success" type="submit">Save</button>
+                        <button class="btn btn-outline-success" type="submit">Update</button>
                     }
                 </div>
                 <div class="modal-footer">

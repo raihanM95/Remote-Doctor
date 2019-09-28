@@ -211,7 +211,6 @@
     <Compile Include="ViewModel\ChatViewForDoctor.cs" />
     <Compile Include="ViewModel\ChatViewForPatient.cs" />
     <Compile Include="ViewModel\DoctorView.cs" />
-    <Compile Include="ViewModel\DoctorViewModel.cs" />
     <Compile Include="ViewModel\PrescriptonView.cs" />
     <Compile Include="ViewModel\SloliutionView.cs" />
   </ItemGroup>
@@ -1379,6 +1378,7 @@
     <Content Include="Views\Admin\Deshboard.cshtml" />
     <Content Include="Views\Doctor\Doctors.cshtml" />
     <Content Include="Views\Patient\Patients.cshtml" />
+    <Content Include="Views\Doctor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
