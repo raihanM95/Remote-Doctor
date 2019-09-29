@@ -1387,6 +1387,11 @@
     <Content Include="Views\Patient\Patients.cshtml" />
     <Content Include="Views\Doctor\Edit.cshtml" />
     <Content Include="Views\CCordinator\Index.cshtml" />
+    <Content Include="Views\CCordinator\Deshboard.cshtml" />
+    <Content Include="Views\CCordinator\Login.cshtml" />
+    <Content Include="Views\CCordinator\VarifyAccount.cshtml" />
+    <Content Include="Views\CCordinator\New.cshtml" />
+    <Content Include="Views\CCordinator\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />

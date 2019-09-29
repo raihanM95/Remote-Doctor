@@ -1,4 +1,4 @@
-﻿@model Doctor.Models.Patient
+﻿@model Doctor.Models.CCordinator
 @{
     ViewBag.Title = "New";
 }
@@ -29,38 +29,38 @@
                         <h3 class="text-center">WELCOME!</h3>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group col-auto">
-                            @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.LabelFor(model => model.CCordinatorName, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter patient name" } })
-                                @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CCordinatorName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter cordinator name" } })
+                                @Html.ValidationMessageFor(model => model.CCordinatorName, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group col-auto">
-                            @Html.LabelFor(model => model.PatientEmail, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.LabelFor(model => model.CCordinatorEmail, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter patient email" } })
-                                @Html.ValidationMessageFor(model => model.PatientEmail, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CCordinatorEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter cordinator email" } })
+                                @Html.ValidationMessageFor(model => model.CCordinatorEmail, "", new { @class = "text-danger" })
                                 @Html.ValidationMessage("EmailExist")
                             </div>
                         </div>
 
                         <div class="form-group col-auto">
-                            @Html.LabelFor(model => model.PatientPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.LabelFor(model => model.CCordinatorPassword, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
-                                @Html.ValidationMessageFor(model => model.PatientPassword, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CCordinatorPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
+                                @Html.ValidationMessageFor(model => model.CCordinatorPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
+
                         <div class="form-group col-auto">
-                            @Html.LabelFor(model => model.PatientConfirmPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.LabelFor(model => model.CCordinatorConfirmPassword, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter confirm password" } })
-                                @Html.ValidationMessageFor(model => model.PatientConfirmPassword, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CCordinatorConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter confirm password" } })
+                                @Html.ValidationMessageFor(model => model.CCordinatorConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
+
                         @Html.HiddenFor(model => model.Id)
                         <div class="form-group col-auto">
                             <div class="col-md-10 text-center ">

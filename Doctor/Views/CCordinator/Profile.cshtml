@@ -1,0 +1,83 @@
+﻿@model Doctor.Models.CCordinator
+<div class="container">
+    <div class="row">
+        <div class="col-10 pt-md-5">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body ">
+                    @{
+                        string url;
+                        if (Model.CCordinatorImagePath != null)
+                        {
+                            url = Model.CCordinatorImagePath;
+                        }
+                        else
+                        {
+                            url = "/Image/user.jpg";
+                        }
+                    }
+                    <img src="@Url.Content(url)" class="mx-auto d-block shadow-lg p-3 mb-5 bg-white rounded"
+                         style="height: 150px; width: 150px;" alt="Not Available" />
+                    <div class="row text-center">
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Name</li>
+                                <li class="list-group-item">Email</li>
+                                <li class="list-group-item">Phone</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@Model.CCordinatorName</li>
+                                <li class="list-group-item">@Model.CCordinatorEmail</li>
+                                <li class="list-group-item">@Model.CCordinatorPhone</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row pt-md-5">
+                        <div class="col-md">
+                            <input onclick="Getdata(@Model.Id)" type="submit" value="Update Information" class="btn mx-auto d-block btn-outline-success" data-toggle="modal" data-target="#EditeModal" />
+                        </div>
+                        <div class="col-md">
+                            <button class="btn mx-auto d-block btn-outline-danger">Reset Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EditeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="ModalTitle">Update Info</h4>
+                    <a href="#" data-dismiss="modal" class="close">&times;</a>
+
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Update", "CCordinator", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(c => c.Id, new { @id = "Cid" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(c => c.CCordinatorName, new { @class = "form-control", @placeholder = "Enter name" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.CCordinatorImagePath)
+                            <input type="file" class="form-control-file" id="Imagefile" name="CCordinatorImagefile" value="@Model.CCordinatorImagePath">
+                            @Html.ValidationMessageFor(c => c.CCordinatorImagefile, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(c => c.CCordinatorEmail, new { @class = "form-control", @placeholder = "Enter email" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(c => c.CCordinatorPhone, new { @class = "form-control", @placeholder = "Enter phone number" })
+                        </div>
+                        <button class="btn btn-outline-success" type="submit">Update</button>
+                    }
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

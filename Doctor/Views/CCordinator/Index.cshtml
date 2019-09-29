@@ -1,17 +1,94 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model Doctor.Models.CCordinator
+<div class="SlideBar">
+    @{
+        var url = Model.CCordinatorImagePath ?? "~/Image/pro-avatar.png";
+    }
+    <div class="Profile">
+        <img src="@Url.Content(url)" class="mx-auto d-block" />
+        <h4>@Model.CCordinatorName</h4>
+        <p>@Model.CCordinatorEmail</p>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
     </div>
-</body>
-</html>
+
+    <div class="menu">
+        <ul>
+            <li id="dashboard">
+                <span class="pr-md-4">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                </span>Dashboard
+            </li>
+            <li id="profile">
+                <span class="pr-md-4">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span>Profile
+            </li>
+            
+            <li id="appointment">
+                <span class="pr-md-4">
+                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                </span>Appointment
+            </li>
+            <li id="transaction">
+                <span class="pr-md-4">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                </span>Transaction
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        @using (Html.BeginForm("Logout", "CCordinator", FormMethod.Post))
+        {
+            <button class="btn btn-danger btn-outline-danger" type="submit">Logout</button>
+        }
+    </div>
+</div>
+<div class="containerrr">
+    <div class="_nav">
+        <div class="Slidetoogle" style="color: black;">
+            <svg width="30" height="30">
+                <path d="M0,5 30,5" stroke="black" stroke-width="5" />
+                <path d="M0,14 30,14" stroke="black" stroke-width="5" />
+                <path d="M0,23 30,23" stroke="black" stroke-width="5" />
+            </svg>
+        </div>
+
+    </div>
+    <div class="bodyy">
+        <div id="loadPartial"></div>
+    </div>
+    <div style="height:1000px"></div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var url = '@Url.Action("Deshboard", "CCordinator")';
+        $("#loadPartial").load(url);
+
+        $(".Slidetoogle").click(function() {
+            $(".SlideBar").toggleClass("active");
+            $(".containerrr").toggleClass("duck");
+
+        });
+
+        $("#dashboard").click(function () {
+            var url= '@Url.Action("Deshboard", "CCordinator")';
+            $("#loadPartial").load(url);
+        });
+        $("#profile").click(function () {
+            var url= '@Url.Action("Profile", "CCordinator")';
+            $("#loadPartial").load(url);
+        });
+
+        $("#appointment").click(function () {
+            var url= '@Url.Action("", "")';
+            $("#loadPartial").load(url);
+        });
+        $("#transaction").click(function () {
+            var url= '@Url.Action("", "")';
+            $("#loadPartial").load(url);
+        });
+    });
+</script>
+<link href="~/Content/Deshboard.css" rel="stylesheet" />

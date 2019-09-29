@@ -10,7 +10,7 @@
         @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
         {
             <div class="alert alert-success">
-                <p><strong>Congress!</strong>@ViewBag.Message</p>
+                <p><strong>Congress! </strong>@ViewBag.Message</p>
             </div>
         }
         else
@@ -19,7 +19,7 @@
                 <p><strong>Sorry! </strong>@ViewBag.Message</p>
             </div>
         }
-        @using (Html.BeginForm("Login", "Patient"))
+        @using (Html.BeginForm("Login", "Doctor"))
         {
             <button type="submit" class="btn btn-outline-success btn-block"> Login Here</button>
         }

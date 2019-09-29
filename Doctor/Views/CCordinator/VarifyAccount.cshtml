@@ -1,8 +1,10 @@
-﻿@{
-    ViewBag.Title = "VarifyAccount";
+﻿
+@{
+    ViewBag.Title = "Verified Account";
 }
-@Html.Partial("_nav")
-<div class="row mt-xl-3">
+
+<h2>Verified Account</h2>
+<div class="row">
     <div class="col-md"></div>
     <div class="col-md text-center">
         @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
@@ -17,9 +19,9 @@
                 <p><strong>Sorry! </strong>@ViewBag.Message</p>
             </div>
         }
-        @using (Html.BeginForm("Login","Patient"))
+        @using (Html.BeginForm("Login", "CCordinator"))
         {
-            <button class="btn btn-outline-success btn-block"> Login Here</button>
+            <button type="submit" class="btn btn-outline-success btn-block"> Login Here</button>
         }
     </div>
     <div class="col-md"></div>

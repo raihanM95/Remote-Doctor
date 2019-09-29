@@ -1,7 +1,7 @@
 ﻿@model Doctor.Models.Admin
 <div class="SlideBar">
     @{
-        var url = Model.ImagePath ?? "~/Image/user.jpg";
+        var url = Model.ImagePath ?? "~/Image/pro-avatar.png";
     }
     <div class="Profile">
         <img src="@Url.Content(url)" class="mx-auto d-block" />
@@ -68,6 +68,7 @@
     <div style="height:1000px"></div>
 
 </div>
+
 <script>
     $(document).ready(function () {
 
