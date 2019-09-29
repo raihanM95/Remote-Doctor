@@ -1,0 +1,93 @@
+﻿@model Doctor.ViewModel.CCordinatorView
+<p style="margin-top:20px; margin-left:20px">
+    <button class="btn btn-info" @*onclick="location.href='@Url.Action("New", "CCordinator")'"*@ data-toggle="modal" data-target="#AddModal"><span class="fa fa-user-plus admin-action-icon"></span> Add C-Cordinator</button>
+</p>
+<div class="container text-center">
+    <h3 class="mt-xl-3">Country Cordinator List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var c in Model.CCordinators)
+        {
+            <tr>
+                <td>@c.CCordinatorName</td>
+                <td>@c.CCordinatorEmail</td>
+                <td>@c.CCordinatorPhone</td>
+                <td>
+                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink(" Edit", "Edit", new { id = c.Id }, new { @class = "admin-action" })</p>
+
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink(" Delete", "Delete", new { id = c.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="modal fade" id="AddModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Add C-Cordinator</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("New", "CCordinator", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorName)
+
+                        @Html.EditorFor(model => model.CCordinator.CCordinatorName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter c-cordinator name" } })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorImagePath)
+
+                        @Html.TextBoxFor(model => model.CCordinator.CCordinatorImagefile, new { Type = "file", @class = "form-control-file" })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorImagefile, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorPhone)
+
+                        @Html.EditorFor(model => model.CCordinator.CCordinatorPhone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter phone no" } })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorPhone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorEmail)
+
+                        @Html.EditorFor(model => model.CCordinator.CCordinatorEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter email" } })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorEmail, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("EmailExist")
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorPassword)
+
+                        @Html.EditorFor(model => model.CCordinator.CCordinatorPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CCordinator.CCordinatorConfirmPassword)
+
+                        @Html.EditorFor(model => model.CCordinator.CCordinatorConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
+                        @Html.ValidationMessageFor(model => model.CCordinator.CCordinatorConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.HiddenFor(model => model.CCordinator.Id)
+                    <button class="btn btn-outline-success" type="submit">Save</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

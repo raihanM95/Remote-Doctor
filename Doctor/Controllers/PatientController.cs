@@ -462,7 +462,7 @@ namespace Doctor.Controllers
                 Patient = patient,
                 Chat = new Chat()
             };
-            return this.View(chatView);
+            return this.PartialView(chatView);
         }
 
         [Authorize]

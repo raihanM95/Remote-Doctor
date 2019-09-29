@@ -20,7 +20,7 @@
                 </div>
             </div>
             <h3 class="h1 text-center"> Information </h3>
-            @using (Html.BeginForm("Apointment", "Patient", new { @id = Model.Doctorses.Id, @pId = @Model.Patient.Id }))
+            @using (Html.BeginForm("Apointment", "CCordinator", new { @id = Model.Doctorses.Id, @*@pId = @Model.Patient.Id*@ }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

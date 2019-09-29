@@ -1393,6 +1393,9 @@
     <Content Include="Views\CCordinator\VarifyAccount.cshtml" />
     <Content Include="Views\CCordinator\New.cshtml" />
     <Content Include="Views\CCordinator\Profile.cshtml" />
+    <Content Include="Views\CCordinator\CCordinators.cshtml" />
+    <Content Include="Views\CCordinator\Apointment.cshtml" />
+    <Content Include="Views\CCordinator\Appointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />

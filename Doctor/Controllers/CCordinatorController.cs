@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -282,6 +283,68 @@ namespace Doctor.Controllers
                 this._contex.SaveChanges();
             }
             return RedirectToAction("Index", "CCordinator");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Apointment(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                try
+                {
+                    int doc = Convert.ToInt32(id);
+                    var doctor = this._contex.Doctorses.Single(d => d.Id == doc);
+                    var appoint = new AppointmentView
+                    {
+                        Doctorses = doctor,
+                        //Patient = CurrentUser(),
+                        Appointment = new Appointment()
+                    };
+                    return this.View(appoint);
+                }
+                catch (Exception)
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Apointment(Appointment appointment, int id, int pId)
+        {
+            appointment.PatientId = pId;
+            appointment.DoctorsId = id;
+            appointment.Date = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                this._contex.Appointments.Add(appointment);
+                this._contex.SaveChanges();
+                ViewBag.Status = true;
+                ViewBag.Message = "Appointment Completed";
+                return Redirect("~/patient");
+            }
+            else
+            {
+                ViewBag.Status = false;
+                ViewBag.Message = "Error !! try again";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+        }
+
+        // Appointment:View
+        public ActionResult Appointment()
+        {
+            //int id = this.CurrentUser().Id;
+            //var appointments = this._contex.Appointments.Include("Doctors").OrderByDescending(p => p.Id).Where(a => a.PatientId == id).Take(10)
+            //    .ToList();
+
+            return this.PartialView(/*appointments*/);
         }
     }
 }

@@ -27,10 +27,10 @@
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </span>Patients
             </li>
-            <li id="coordinator">
+            <li id="ccordinator">
                 <span class="pr-md-4">
                     <i class="fa fa-users" aria-hidden="true"></i>
-                </span>Coordinator
+                </span>C-Cordinator
             </li>
             <li id="treatment">
                 <span class="pr-md-4">
@@ -93,7 +93,7 @@
             var url= '@Url.Action("Patients", "Patient")';
             $("#loadPartial").load(url);
         });
-        $("#coordinator").click(function () {
+        $("#ccordinator").click(function () {
             var url= '@Url.Action("CCordinators", "CCordinator")';
             $("#loadPartial").load(url);
         });
