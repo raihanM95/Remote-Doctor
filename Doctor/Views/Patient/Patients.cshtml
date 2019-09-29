@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Doctor.Models.Patient>
+﻿@model Doctor.ViewModel.PatientView
 <p style="margin-top:20px; margin-left:20px">
-    <button class="btn btn-info" onclick="location.href='@Url.Action("New", "Patient")'"><span class="fa fa-user-plus admin-action-icon"></span>Add Patient</button>
+    <button class="btn btn-info" @*onclick="location.href='@Url.Action("New", "Patient")'"*@ data-toggle="modal" data-target="#AddModal"><span class="fa fa-user-plus admin-action-icon"></span> Add Patient</button>
 </p>
 <div class="container text-center">
     <h3 class="mt-xl-3">Patients List</h3>
@@ -11,19 +11,97 @@
             <th>Phone</th>
             <th>Action</th>
         </tr>
-        @foreach (var pa in Model)
+        @foreach (var pa in Model.Patients)
         {
             <tr>
                 <td>@pa.PatientName</td>
                 <td>@pa.PatientEmail</td>
                 <td>@pa.PatientPhone</td>
                 <td>
-                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink("Edit", "Edit", new { @*id = item.ID*@ }, new { @class = "admin-action" })</p>
+                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink(" Edit", "Edit", new { id = pa.Id }, new { @class = "admin-action" })</p>
 
-                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink("Delete", "Delete", new { @*id = item.ID*@ }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink(" Delete", "Delete", new { id = pa.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
                 </td>
             </tr>
         }
     </table>
 </div>
+<div class="modal fade" id="AddModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Add Patient</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("New", "Patient", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
 
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientName)
+
+                        @Html.EditorFor(model => model.Patient.PatientName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter patient name" } })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientImagePath)
+
+                        @Html.TextBoxFor(model => model.Patient.PatientImagefile, new { Type = "file", @class = "form-control-file" })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientImagefile, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientBirthDate)
+
+                        @Html.EditorFor(model => model.Patient.PatientBirthDate, "{0:d mm yyyy}", new { htmlAttributes = new { @class = "form-control", type = "Date" } })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientBirthDate, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.BloodGroup)
+
+                        @Html.EditorFor(model => model.Patient.BloodGroup, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter blood group" } })
+                        @Html.ValidationMessageFor(model => model.Patient.BloodGroup, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientPhone)
+
+                        @Html.EditorFor(model => model.Patient.PatientPhone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter phone no" }} )
+                        @Html.ValidationMessageFor(model => model.Patient.PatientPhone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientEmail)
+
+                        @Html.EditorFor(model => model.Patient.PatientEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter email" } })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientEmail, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("EmailExist")
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientPassword)
+
+                        @Html.EditorFor(model => model.Patient.PatientPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientConfirmPassword)
+
+                        @Html.EditorFor(model => model.Patient.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
+                        @Html.ValidationMessageFor(model => model.Patient.PatientConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button class="btn btn-outline-success" type="submit">Save</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,4 @@
-﻿
-@model Doctor.Models.Patient
-
+﻿@model Doctor.Models.Patient
 @{
     ViewBag.Title = "New";
 }
@@ -32,7 +30,7 @@
                         <div class="form-group col-auto">
                             @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter patient name" } })
                                 @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -40,7 +38,7 @@
                         <div class="form-group col-auto">
                             @Html.LabelFor(model => model.PatientEmail, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter patient email" } })
                                 @Html.ValidationMessageFor(model => model.PatientEmail, "", new { @class = "text-danger" })
                                 @Html.ValidationMessage("EmailExist")
                             </div>
@@ -49,17 +47,19 @@
                         <div class="form-group col-auto">
                             @Html.LabelFor(model => model.PatientPassword, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PatientPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
                                 @Html.ValidationMessageFor(model => model.PatientPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        
                         <div class="form-group col-auto">
                             @Html.LabelFor(model => model.PatientConfirmPassword, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter confirm password" } })
                                 @Html.ValidationMessageFor(model => model.PatientConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        
                         @Html.HiddenFor(model => model.Id)
                         <div class="form-group col-auto">
                             <div class="col-md-10 text-center ">
@@ -72,7 +72,7 @@
                 if (ViewBag.Message != null)
                 {
                     <div class="alert alert-danger">
-                        <strong>Error!</strong>@ViewBag.Message
+                        <strong>Error! </strong>@ViewBag.Message
                     </div>
                 }
             }
@@ -82,6 +82,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

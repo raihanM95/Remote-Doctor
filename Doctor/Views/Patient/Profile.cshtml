@@ -62,7 +62,7 @@
                     {
                         @Html.HiddenFor(p => p.Id, new { @id = "Pid" })
                         <div class="form-group">
-                            @Html.TextBoxFor(p => p.PatientName, new { @class = "form-control", @placeholder = "Enter Name" })
+                            @Html.TextBoxFor(p => p.PatientName, new { @class = "form-control", @placeholder = "Enter name" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(p => p.PatientImagePath)
@@ -73,13 +73,13 @@
                             <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="PatientBirthDate" placeholder="Birthdate" type="Date" value="@Model.PatientBirthDate">
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(p => p.PatientEmail, new { @class = "form-control", @placeholder = "Enter Email" })
+                            @Html.TextBoxFor(p => p.PatientEmail, new { @class = "form-control", @placeholder = "Enter email" })
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(p => p.BloodGroup, new { @class = "form-control", @placeholder = "Enter Blood Group" })
+                            @Html.TextBoxFor(p => p.BloodGroup, new { @class = "form-control", @placeholder = "Enter blood group" })
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(p => p.PatientPhone, new { @class = "form-control", @placeholder = "Enter Phone number" })
+                            @Html.TextBoxFor(p => p.PatientPhone, new { @class = "form-control", @placeholder = "Enter phone number" })
                         </div>
                         <button class="btn btn-outline-success" type="submit">Update</button>
                     }

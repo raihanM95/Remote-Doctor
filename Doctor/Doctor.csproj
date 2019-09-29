@@ -211,6 +211,7 @@
     <Compile Include="ViewModel\ChatViewForDoctor.cs" />
     <Compile Include="ViewModel\ChatViewForPatient.cs" />
     <Compile Include="ViewModel\DoctorView.cs" />
+    <Compile Include="ViewModel\PatientView.cs" />
     <Compile Include="ViewModel\PrescriptonView.cs" />
     <Compile Include="ViewModel\SloliutionView.cs" />
   </ItemGroup>

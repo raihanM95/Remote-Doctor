@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "New";
 }
-
 @Html.Partial("_nav")
 <div class="row mb-xl-5">
     <div class="col-md-6 mx-auto d-block">
@@ -27,7 +26,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorName)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter doctor name" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorName, "", new { @class = "text-danger" })
                     </div>
 
@@ -48,7 +47,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorEmail)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter email" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorEmail, "", new { @class = "text-danger" })
                         @Html.ValidationMessage("EmailExist")
                     </div>
@@ -56,14 +55,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorDegree)
 
-                        @Html.TextAreaFor(model => model.Doctors.DoctorDegree, new { @class = "form-control", @placeholder = "Details of degree, Institute and Other specification" })
+                        @Html.TextAreaFor(model => model.Doctors.DoctorDegree, new { @class = "form-control", @placeholder = "Details of Degree, Institute and Other specification" })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorDegree, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.RegNo)
 
-                        @Html.EditorFor(model => model.Doctors.RegNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.RegNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter reg no" } })
                         @Html.ValidationMessageFor(model => model.Doctors.RegNo, "", new { @class = "text-danger" })
                     </div>
 
@@ -84,14 +83,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorPassword)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorPassword, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorConfirmPassword)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter confirm password" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorConfirmPassword, "", new { @class = "text-danger" })
                     </div>
 

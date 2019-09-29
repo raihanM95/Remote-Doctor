@@ -23,18 +23,19 @@ namespace Doctor.Models
         public HttpPostedFileBase PatientImagefile { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Date Of Birth")]
+        [Display(Name = "Date of Birth")]
         public DateTime? PatientBirthDate { get; set; }
 
         [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
 
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone No")]
         public string PatientPhone { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string PatientEmail { get; set; }
 
         [Required(AllowEmptyStrings = false)]

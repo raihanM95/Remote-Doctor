@@ -275,11 +275,11 @@ namespace Doctor.Controllers
                 {
                     ViewBag.AlertMsg = "Delete Successfully";
                 }
-                return RedirectToAction("Doctors");
+                return RedirectToAction("Index", "Admin");
             }
             catch
             {
-                return RedirectToAction("Doctors");
+                return RedirectToAction("Index", "Admin");
             }
         }
 
@@ -321,7 +321,7 @@ namespace Doctor.Controllers
             {
                 this._contex.Entry(doctors).State = EntityState.Modified;
                 this._contex.SaveChanges();
-                return RedirectToAction("Doctors");
+                return RedirectToAction("Index", "Admin");
             }
             return PartialView(DrView);
         }
@@ -414,19 +414,20 @@ namespace Doctor.Controllers
                 {
                     doctor.DoctorImagePath = Doctor.DoctorImagePath;
                 }
-                Doctor.DoctorName = doctor.DoctorName;
-                Doctor.DoctorImagePath = doctor.DoctorImagePath;
-                Doctor.DoctorBirthDate = doctor.DoctorBirthDate;
-                Doctor.DoctorEmail = doctor.DoctorEmail;
-                Doctor.DoctorDegree = doctor.DoctorDegree;
-                Doctor.RegNo = doctor.RegNo;
-                Doctor.DoctorDetails = doctor.DoctorDetails;
-                Doctor.DoctorPassword = doctor.DoctorPassword;
-                Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
-                Doctor.DepartmentId = doctor.DepartmentId;
+                //Doctor.DoctorName = doctor.DoctorName;
+                //Doctor.DoctorImagePath = doctor.DoctorImagePath;
+                //Doctor.DoctorBirthDate = doctor.DoctorBirthDate;
+                //Doctor.DoctorEmail = doctor.DoctorEmail;
+                //Doctor.DoctorDegree = doctor.DoctorDegree;
+                //Doctor.RegNo = doctor.RegNo;
+                //Doctor.DoctorDetails = doctor.DoctorDetails;
+                //Doctor.DoctorPassword = doctor.DoctorPassword;
+                //Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
+                //Doctor.DepartmentId = doctor.DepartmentId;
+                this._contex.Entry(doctor).State = EntityState.Modified;
                 this._contex.SaveChanges();
             }
-            return RedirectToAction("Profile", "Doctor");
+            return RedirectToAction("Index", "Doctor");
         }
 
         public ActionResult Deshboard()

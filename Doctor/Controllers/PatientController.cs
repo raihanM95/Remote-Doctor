@@ -205,7 +205,33 @@ namespace Doctor.Controllers
         {
             var Patient = this._contex.Patients.ToList();
 
-            return PartialView(Patient);
+            var PView = new PatientView
+            {
+                Patients = Patient
+            };
+            return PartialView(PView);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                int isExecuted = 0;
+
+                Patient aPatient = this._contex.Patients.FirstOrDefault(dr => dr.Id == id);
+                this._contex.Patients.Remove(aPatient);
+                isExecuted = this._contex.SaveChanges();
+
+                if (isExecuted > 0)
+                {
+                    ViewBag.AlertMsg = "Delete Successfully";
+                }
+                return RedirectToAction("Index", "Admin");
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Admin");
+            }
         }
 
         [Authorize]
@@ -250,7 +276,7 @@ namespace Doctor.Controllers
                 Patien.BloodGroup = patient.BloodGroup;
                 this._contex.SaveChanges();
             }
-            return RedirectToAction("Profile", "Patient");
+            return RedirectToAction("Index", "Patient");
         }
 
         [Authorize]

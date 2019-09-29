@@ -1,6 +1,6 @@
 ﻿@model Doctor.ViewModel.DoctorView
 <p style="margin-top:20px; margin-left:20px">
-    <button class="btn btn-info" @*onclick="location.href='@Url.Action("New", "Doctor")'"*@ data-toggle="modal" data-target="#AddModal"><span class="fa fa-user-plus admin-action-icon"></span>Add Doctor</button>
+    <button class="btn btn-info" @*onclick="location.href='@Url.Action("New", "Doctor")'"*@ data-toggle="modal" data-target="#AddModal"><span class="fa fa-user-plus admin-action-icon"></span> Add Doctor</button>
 </p>
 <div class="container text-center">
     <h3 class="mt-xl-3">Doctors List</h3>
@@ -19,8 +19,8 @@
                 <td>@dr.DoctorDegree</td>
                 <td>
                     @*<a onclick="GetData(@dr.Id)"><i class="fa fa-edit"></i></a>*@
-                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink("Edit", "", new { id = dr.Id }, new { @class = "admin-action", onclick = "GetData(@dr.Id)"@*, data_toggle = "modal", data_target = "#EditModal"*@ })</p>
-                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink("Delete", "Delete", new { id = dr.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                    <p class="btn btn-primary btn-sm admin-action-btn"><span class="fa fa-pencil-square-o admin-action-icon"></span>@Html.ActionLink(" Edit", "", new { id = dr.Id }, new { @class = "admin-action", onclick = "GetData(@dr.Id)"@*, data_toggle = "modal", data_target = "#EditModal"*@ })</p>
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink(" Delete", "Delete", new { id = dr.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
                 </td>
             </tr>
         }
@@ -42,7 +42,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorName)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter doctor name" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorName, "", new { @class = "text-danger" })
                     </div>
 
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorEmail)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter email" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorEmail, "", new { @class = "text-danger" })
                         @Html.ValidationMessage("EmailExist")
                     </div>
@@ -71,14 +71,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorDegree)
 
-                        @Html.TextAreaFor(model => model.Doctors.DoctorDegree, new { @class = "form-control", @placeholder = "Details of degree, Institute and Other specification" })
+                        @Html.TextAreaFor(model => model.Doctors.DoctorDegree, new { @class = "form-control", @placeholder = "Details of Degree, Institute and Other specification" })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorDegree, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.RegNo)
 
-                        @Html.EditorFor(model => model.Doctors.RegNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.RegNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter reg no" } })
                         @Html.ValidationMessageFor(model => model.Doctors.RegNo, "", new { @class = "text-danger" })
                     </div>
 
@@ -99,14 +99,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorPassword)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter 8 characters password" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorPassword, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DoctorConfirmPassword)
 
-                        @Html.EditorFor(model => model.Doctors.DoctorConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Doctors.DoctorConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
                         @Html.ValidationMessageFor(model => model.Doctors.DoctorConfirmPassword, "", new { @class = "text-danger" })
                     </div>
 

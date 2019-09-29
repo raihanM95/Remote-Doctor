@@ -13,7 +13,7 @@ namespace Doctor.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Enter Doctor Name")]
+        [Display(Name = "Enter Name")]
         public string DoctorName { get; set; }
 
         [Display(Name = "Upload Image")]
@@ -29,12 +29,12 @@ namespace Doctor.Models
         public DateTime DoctorBirthDate { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string DoctorEmail { get; set; }
 
-        [Display(Name = "Degree")]
         [Required(AllowEmptyStrings = false)]
+        [Display(Name = "Degree")]
         [StringLength(200)]
         public string DoctorDegree { get; set; }
 

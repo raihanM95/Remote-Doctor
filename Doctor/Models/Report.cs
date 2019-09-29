@@ -12,8 +12,8 @@ namespace Doctor.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Test Name")]
         [Required]
+        [Display(Name = "Test Name")]
         public string TestName { get; set; }
 
         [Display(Name = "Description")]

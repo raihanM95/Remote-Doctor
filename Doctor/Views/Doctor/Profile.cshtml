@@ -66,7 +66,7 @@
                     {
                         @Html.HiddenFor(dr => dr.Id, new { @id = "Did" })
                         <div class="form-group">
-                            @Html.TextBoxFor(dr => dr.DoctorName, new { @class = "form-control", @placeholder = "Enter Name" })
+                            @Html.TextBoxFor(dr => dr.DoctorName, new { @class = "form-control", @placeholder = "Enter name" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(dr => dr.DoctorImagePath)
@@ -77,16 +77,16 @@
                             <input class="form-control" data-val="true" data-val-date="The field Date Of Birth must be a date." id="BirthDate" name="DoctorBirthDate" placeholder="Date of Birth" type="Date" value="@Model.DoctorBirthDate">
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(dr => dr.DoctorEmail, new { @class = "form-control", @placeholder = "Enter Email" })
+                            @Html.TextBoxFor(dr => dr.DoctorEmail, new { @class = "form-control", @placeholder = "Enter email" })
                         </div>
                         @*<div class="form-group">
                             @Html.TextBoxFor(dr => dr.RegNo, new { @class = "form-control", @placeholder = "Enter Reg No" })
                         </div>*@
                         <div class="form-group">
-                            @Html.TextBoxFor(dr => dr.DoctorDegree, new { @class = "form-control", @placeholder = "Enter Degree" })
+                            @Html.TextAreaFor(dr => dr.DoctorDegree, new { @class = "form-control", @placeholder = "Details of Degree, Institute and Other specification" })
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(dr => dr.DoctorDetails, new { @class = "form-control", @placeholder = "Enter Details" })
+                            @Html.TextAreaFor(dr => dr.DoctorDetails, new { @class = "form-control", @placeholder = "Details of Specialties, Experience and Expertise" })
                         </div>
                         <button class="btn btn-outline-success" type="submit">Update</button>
                     }
