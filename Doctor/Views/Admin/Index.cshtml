@@ -94,15 +94,15 @@
             $("#loadPartial").load(url);
         });
         $("#coordinator").click(function () {
-            var url= '@Url.Action("Coordinator", "Coordinators")';
+            var url= '@Url.Action("CCordinators", "CCordinator")';
             $("#loadPartial").load(url);
         });
         $("#treatment").click(function () {
-            var url= '@Url.Action("", "")';
+            var url= '@Url.Action("Treatment", "Treatment")';
             $("#loadPartial").load(url);
         });
         $("#transaction").click(function () {
-            var url= '@Url.Action("", "")';
+            var url= '@Url.Action("Transaction", "Transaction")';
             $("#loadPartial").load(url);
         });
     });

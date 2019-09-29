@@ -13,7 +13,7 @@ namespace Doctor
         {            
             var fromEmail = new MailAddress("remote.doctor@gmail.com", "Remote Doctor");
             var ToEmail = new MailAddress(Email);
-            var FormEmailPass = "*******";
+            var FormEmailPass = "********";
             string Subject = "Your Account Successfully Created";
 
             string body = "<br><br><br><b>Welcome!!</b>  <br>" +

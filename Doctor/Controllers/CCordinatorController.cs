@@ -1,4 +1,5 @@
 ﻿using Doctor.Models;
+using Doctor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,7 @@ namespace Doctor.Controllers
         // GET: CCordinator
         public ActionResult Index()
         {
-            return View();
+            return View(this.CurrentUser());
         }
 
         [HttpGet]
@@ -195,10 +196,43 @@ namespace Doctor.Controllers
         }
 
         [NonAction]
-        public CCordinator GetCurrentUser()
+        public CCordinator CurrentUser()
         {
             var id = User.Identity.Name;
             return this._contex.CCordinators.Single(a => a.CCordinatorEmail == id);
+        }
+
+        public ActionResult CCordinators()
+        {
+            var CCordinator = this._contex.CCordinators.ToList();
+
+            var CView = new CCordinatorView
+            {
+                CCordinators = CCordinator
+            };
+            return PartialView(CView);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                int isExecuted = 0;
+
+                CCordinator aCCordinator = this._contex.CCordinators.FirstOrDefault(dr => dr.Id == id);
+                this._contex.CCordinators.Remove(aCCordinator);
+                isExecuted = this._contex.SaveChanges();
+
+                if (isExecuted > 0)
+                {
+                    ViewBag.AlertMsg = "Delete Successfully";
+                }
+                return RedirectToAction("Index", "CCordinator");
+            }
+            catch
+            {
+                return RedirectToAction("Index", "CCordinator");
+            }
         }
 
         [Authorize]

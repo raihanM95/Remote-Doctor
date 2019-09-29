@@ -214,6 +214,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\AppointmentView.cs" />
+    <Compile Include="ViewModel\CCordinatorView.cs" />
     <Compile Include="ViewModel\ChatViewForDoctor.cs" />
     <Compile Include="ViewModel\ChatViewForPatient.cs" />
     <Compile Include="ViewModel\DoctorView.cs" />
