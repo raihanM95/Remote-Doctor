@@ -11,14 +11,14 @@ namespace Doctor
     {
         public static void SendVarificationEmail(string Email, string link)
         {            
-            var fromEmail = new MailAddress("remote.doctor@gmail.com", "Hospital");
+            var fromEmail = new MailAddress("remote.doctor@gmail.com", "Remote Doctor");
             var ToEmail = new MailAddress(Email);
-            var FormEmailPass = "********";
+            var FormEmailPass = "*******";
             string Subject = "Your Account Successfully Created";
 
             string body = "<br><br><br><b>Welcome!!</b>  <br>" +
                           "Successfully created your account. Please click on the link to active your account  " +
-                          "<a href='" + link + "'><strong> click Here</strong></a> <br><br><br>" + link;
+                          "<a href='" + link + "'><strong> Click Here</strong></a> <br><br><br>" + link;
             var smtp = new SmtpClient
                            {
                                Host = "smtp.gmail.com",

@@ -171,6 +171,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CCordinatorController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -182,8 +183,13 @@
     <Compile Include="Migrations\201909181950512_Admin.Designer.cs">
       <DependentUpon>201909181950512_Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909291413408_CCordinator.cs" />
+    <Compile Include="Migrations\201909291413408_CCordinator.Designer.cs">
+      <DependentUpon>201909291413408_CCordinator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\CCordinator.cs" />
     <Compile Include="Security\Crypto.cs" />
     <Compile Include="DatabaseContext\DataContex.cs" />
     <Compile Include="Security\Email.cs" />
@@ -1380,6 +1386,7 @@
     <Content Include="Views\Doctor\Doctors.cshtml" />
     <Content Include="Views\Patient\Patients.cshtml" />
     <Content Include="Views\Doctor\Edit.cshtml" />
+    <Content Include="Views\CCordinator\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
@@ -1403,6 +1410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909181950512_Admin.resx">
       <DependentUpon>201909181950512_Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291413408_CCordinator.resx">
+      <DependentUpon>201909291413408_CCordinator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

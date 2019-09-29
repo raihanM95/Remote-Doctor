@@ -27,19 +27,18 @@ namespace Doctor.Controllers
         }
 
         // GET: Admin
+        [Authorize]
         public ActionResult Index()
         {
             return View(this.GetCurrentUser());
         }
-
-        // Login
+        
         [HttpGet]
         public ActionResult Login()
         {
             return this.View();
         }
 
-        // Login
         [HttpPost]
         public ActionResult Login(Login login, string ReturnUrl)
         {
@@ -85,7 +84,7 @@ namespace Doctor.Controllers
             return View();
         }
 
-        // Logout
+        [Authorize]
         [HttpPost]
         public ActionResult Logout()
         {
@@ -101,7 +100,7 @@ namespace Doctor.Controllers
             return this._contex.Admins.Single(a => a.Email == id);
         }
 
-        // Deshboard
+        [Authorize]
         public ActionResult Deshboard()
         {
             return PartialView();

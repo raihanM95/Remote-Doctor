@@ -70,7 +70,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Patient.PatientPhone)
 
-                        @Html.EditorFor(model => model.Patient.PatientPhone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter phone no" }} )
+                        @Html.EditorFor(model => model.Patient.PatientPhone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter phone no" } })
                         @Html.ValidationMessageFor(model => model.Patient.PatientPhone, "", new { @class = "text-danger" })
                     </div>
 
@@ -95,7 +95,7 @@
                         @Html.EditorFor(model => model.Patient.PatientConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
                         @Html.ValidationMessageFor(model => model.Patient.PatientConfirmPassword, "", new { @class = "text-danger" })
                     </div>
-
+                    @Html.HiddenFor(model => model.Patient.Id)
                     <button class="btn btn-outline-success" type="submit">Save</button>
                 }
             </div>
