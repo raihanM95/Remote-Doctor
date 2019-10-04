@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -33,5 +34,8 @@ namespace Doctor.Models
         public int DoctorsId { get; set; }
         public virtual Patient Patient { get; set; }
         public int PatientId { get; set; }
+
+        [NotMapped]
+        public virtual Medicine Medicine { get; set; }
     }
 }

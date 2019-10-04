@@ -103,7 +103,11 @@ namespace Doctor.Controllers
         [Authorize]
         public ActionResult Deshboard()
         {
-            return PartialView();
+            var CCordinators = this._contex.CCordinators.Count();
+            var Doctors = this._contex.Doctorses.Count();
+            var Patients = this._contex.Patients.Count();
+            ViewBag.Users = CCordinators + Doctors + Patients;
+            return this.PartialView();
         }
     }
 }

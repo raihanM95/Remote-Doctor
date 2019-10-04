@@ -42,11 +42,11 @@
                         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
                     </span>Appointment
                 </li>
-                <li id="history">
+                @*<li id="history">
                     <span class="pr-md-4">
                         <i class="fa fa-history" aria-hidden="true"></i>
                     </span>History
-                </li>
+                </li>*@
                 <li id="chat">
                     <span class="pr-md-4">
                         <i class="fa fa-comments" aria-hidden="true"></i>
@@ -102,10 +102,10 @@
             var url= '@Url.Action("Patient", "Doctor")';
             $("#loadPartial").load(url);
         });
-        $("#history").click(function () {
+        @*$("#history").click(function () {
             var url= '@Url.Action("History", "Doctor")';
             $("#loadPartial").load(url);
-        });
+        });*@
         $("#appointment").click(function () {
             var url= '@Url.Action("Appointment", "Doctor")';
             $("#loadPartial").load(url);

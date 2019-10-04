@@ -374,6 +374,22 @@ namespace Doctor.Controllers
             }
         }
 
+        public JsonResult GetTreatmentHistory(int Id)
+        {
+            List<Medicine> Ma = new List<Medicine>();
+
+            var Appointment = this._contex.Appointments.Where(p => p.PatientId == Id).ToList();
+            foreach (var ap in Appointment)
+            {
+                var Medicine = this._contex.Medicines.Where(a => a.AppointmentId == ap.Id).ToList();
+                foreach (var ma in Medicine)
+                {
+                    Ma.Add(ma);
+                }
+            }
+            return Json(Ma, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Profile()
         {
             var doctor = this.GetCurrentDoctor();
@@ -435,8 +451,9 @@ namespace Doctor.Controllers
             var doctor = this.GetCurrentDoctor();
             if (doctor != null)
             {
-                var ap = this._contex.Appointments.Where(a => a.DoctorsId == doctor.Id && a.Status == false);
-                return this.PartialView(ap);
+                ViewBag.Appointments = this._contex.Appointments
+                    .Where(a => a.Status == false && a.DoctorsId == doctor.Id).Count();
+                return this.PartialView();
             }
             else
             {

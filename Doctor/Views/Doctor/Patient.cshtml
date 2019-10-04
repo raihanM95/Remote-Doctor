@@ -6,6 +6,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Action</th>
         </tr>
         @foreach (var p in Model)
         {
@@ -13,7 +14,73 @@
                 <td>@p.PatientName</td>
                 <td>@p.PatientEmail</td>
                 <td>@p.PatientPhone</td>
+                
+                <td>
+                    <batton onclick="GetId('@p.Id');" class="btn btn-info"><span class="fa fa-history admin-action-icon"></span></batton>
+                </td>
             </tr>
         }
     </table>
 </div>
+
+<div class="modal fade" id="TreatmentHistoryModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Treatment History</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+            </div>
+            <div class="modal-body">
+                <table class="table table-active">
+                    <thead>
+                        <tr>
+                            <th>Medicine</th>
+                            <th>MG/ML</th>
+                            <th>Dose</th>
+                            <th>Day</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var id;
+    debugger;
+    function GetId(e) {
+        id = e;
+        var counter = 0;
+
+        setInterval(function () {
+            debugger;
+            $.ajax({
+                url: "/Doctor/GetTreatmentHistory/",
+                type: "GET",
+                data: { id:id },
+        
+                success: function (Ma) {
+                    if (Object.keys(Ma).length > counter) {
+                        debugger;
+                        $('#TreatmentHistoryModal').modal('show');
+                        $.each(Ma, function (index, value) {
+                            $("#historyTableBody").append("<tr>" + "<td>" + value.Name + "</td>" + "<td>" + value.Amount + "</td>" + "<td>" + value.Dose + "</td>" + "<td>" + value.Day + "</td>" + "<td>" + value.Comment + "</td>" + "</tr>");
+                        });
+                    }
+                    counter = Object.keys(Ma).length;
+                }
+                //error: function (xhr, status) {
+                //    alert(status);
+                //}
+            });
+        });
+    } 
+</script>
