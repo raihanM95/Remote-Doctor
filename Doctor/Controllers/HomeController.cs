@@ -46,6 +46,11 @@ namespace Doctor.Controllers
             return this.View();
         }
 
+        public ActionResult Contact()
+        {
+            return this.View();
+        }
+
         public ActionResult FAQ()
         {
             return this.View();

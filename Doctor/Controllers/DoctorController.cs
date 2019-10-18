@@ -570,7 +570,7 @@ namespace Doctor.Controllers
                     }
                     catch (Exception ex)
                     {
-                        return Json("Error! try again");
+                        return Json("Input is invalide");
                     }
                 }
                 else

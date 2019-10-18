@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>@ViewBag.Title - Remote Doctor</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/home/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/home/css/animate.css">
+
+    <link rel="stylesheet" href="~/Content/home/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/home/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/home/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/Content/home/css/aos.css">
+
+    <link rel="stylesheet" href="~/Content/home/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Content/home/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Content/home/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/Content/home/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/home/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/home/css/style.css">
+</head>
+<body>
+    <!-- header -->
+    <!-- nav -->
+    <nav class="navbar py-4 navbar-expand-lg ftco_navbar navbar-light bg-light flex-row">
+        <div class="container">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                <div class="col-lg-2 pr-4 align-items-center">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Remote<span> Doctor</span></a>
+                </div>
+                <div class="col-lg-10 d-none d-md-block">
+                    <div class="row d-flex">
+                        <div class="col-md-4 pr-4 d-flex topper align-items-center">
+                            <div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-map"></span></div>
+                            <span class="text">Address: 102 Shukrabad, Mirpur Road, Dhaka, Bangladesh</span>
+                        </div>
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+                            <span class="text">Email: remote.doctor@gmail.com</span>
+                        </div>
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+                            <span class="text">Phone: + 02-9138234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container d-flex align-items-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <p class="button-custom order-lg-last mb-0"><a href="@Url.Action("Login", "Patient")" class="btn btn-secondary py-2 px-3">Make An Appointment</a></p>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a href="@Url.Action("Index", "Home")" class="nav-link pl-0">Home</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Doctor", "Home")" class="nav-link">Doctors</a></li>
+                    <li class="nav-item"><a href="@Url.Action("About", "Home")" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Contact", "Home")" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="@Url.Action("FAQ", "Home")" class="nav-link">FAQ</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Login", "Doctor")" class="nav-link">Log in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- //nav -->
+    <!-- //header -->
+
+    @RenderBody()
+
+    <!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-5">
+                        <h2 class="ftco-heading-2 logo">Remote<span> Doctor</span></h2>
+                        <p>Patients can connect in the way that is easiest for them, wherever they are. They can seek medical attention from their disease respective doctors.</p>
+                    </div>
+                    <div class="ftco-footer-widget mb-5">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">102 Shukrabad, Mirpur Road, Dhaka, Bangladesh</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+ 02-9138234</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">remote.doctor@gmail.com</span></a></li>
+                            </ul>
+                        </div>
+
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.facebook.com/remotedoctor.health"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-5 ml-md-4">
+                        <h2 class="ftco-heading-2">Navigation</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("Index", "Home")"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
+                            <li><a href="@Url.Action("Doctor", "Home")"><span class="ion-ios-arrow-round-forward mr-2"></span>Doctors</a></li>
+                            <li><a href="@Url.Action("About", "Home")"><span class="ion-ios-arrow-round-forward mr-2"></span>About</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
+                            <li><a href="@Url.Action("FAQ", "Home")"><span class="ion-ios-arrow-round-forward mr-2"></span>FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="ftco-footer-widget mb-5 ml-md-4">
+                        <h2 class="ftco-heading-2">Services</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Neurolgy</a></li>
+                            <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Dentist</a></li>
+                            <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Ophthalmology</a></li>
+                            <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Cardiology</a></li>
+                            <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Surgery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-5">
+                        <h2 class="ftco-heading-2">Recent Blog</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(Image/home/images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Oct 25, 2019</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-5 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(Image/home/images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Oct 25, 2019</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-5">
+                        <h2 class="ftco-heading-2">Opening Hours</h2>
+                        <h3 class="open-hours pl-4"><span class="ion-ios-time mr-3"></span>We are open 24/7</h3>
+                    </div>
+                    <div class="ftco-footer-widget mb-5">
+                        <h2 class="ftco-heading-2">Subscribe Us!</h2>
+                        <form action="#" class="subscribe-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
+                                <input type="submit" value="Subscribe" class="form-control submit px-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> Remote Doctor. All rights reserved | Developed by
+                        <a href="" class="text-white"> Team RAM.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+    <script src="~/Scripts/home/js/jquery.min.js"></script>
+    <script src="~/Scripts/home/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Scripts/home/js/popper.min.js"></script>
+    <script src="~/Scripts/home/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/home/js/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/home/js/jquery.waypoints.min.js"></script>
+    <script src="~/Scripts/home/js/jquery.stellar.min.js"></script>
+    <script src="~/Scripts/home/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/home/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/home/js/aos.js"></script>
+    <script src="~/Scripts/home/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Scripts/home/js/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/home/js/jquery.timepicker.min.js"></script>
+    <script src="~/Scripts/home/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/Scripts/home/js/google-map.js"></script>
+    <script src="~/Scripts/home/js/main.js"></script>
+</body>
+</html>

@@ -25,7 +25,7 @@ namespace Doctor.Models
         public string ImagePath { get; set; }
 
         [NotMapped]
-        [Required]
+        ///[Required]
         public HttpPostedFileBase Imagefile { get; set; }
 
         public virtual Appointment Appointment { get; set; }

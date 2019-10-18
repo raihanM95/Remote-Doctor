@@ -5,17 +5,18 @@
 @Html.Partial("_nav")
 <div class="row">
     <div class="col-md-4 mx-auto d-block mt-xl-3 mb-xl-3 shadow-lg p-3 mb-2 bg-white rounded">
-        <h2 class="p-xl-3">Report Submit</h2>
-        <h3 class="p-xl-3">@Model.TestName</h3>
-        <h5 class="pl-xl-3 pb-xl-3">@Model.Description</h5>
+        <h3 class="p-xl-3">Report Submission</h3>
+        <h5 class="p-xl-3">Test name: @Model.TestName</h5>
+        <h6 class="pl-xl-3 pb-xl-3">Description: @Model.Description</h6>
         @using (Html.BeginForm("ReportSubmit", "Patient", new { id = Model.Id }, FormMethod.Post, new { @encType = "multipart/form-data" }))
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.ImagePath,new {@class= "pl-xl-3" })
-                <input type="file" class="form-control-file pl-xl-3" id="Imagefile" name="Imagefile" value="@Model.ImagePath">
+                <input type="file" class="form-control-file pl-xl-3" id="Imagefile" name="Imagefile" value="@Model.ImagePath" required>
                 @Html.ValidationMessageFor(model => model.Imagefile, "", new { @class = "text-danger" })
             </div>
             <button class="btn btn-outline-success m-sm-auto d-block" type="submit">Save</button>
         }
     </div>
 </div>
+<div style="height:150px"></div>
