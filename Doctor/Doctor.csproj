@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201909291413408_CCordinator.Designer.cs">
       <DependentUpon>201909291413408_CCordinator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910201132579_Appointment.cs" />
+    <Compile Include="Migrations\201910201132579_Appointment.Designer.cs">
+      <DependentUpon>201910201132579_Appointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\CCordinator.cs" />
@@ -1590,6 +1594,7 @@
     <Content Include="Views\CCordinator\Appointment.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Patient\Accept.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
@@ -1616,6 +1621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909291413408_CCordinator.resx">
       <DependentUpon>201909291413408_CCordinator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910201132579_Appointment.resx">
+      <DependentUpon>201910201132579_Appointment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

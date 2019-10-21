@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Web.Helpers;
 using Newtonsoft.Json;
+using System.Data.Entity;
 
 namespace Doctor.Controllers
 {
@@ -290,7 +291,35 @@ namespace Doctor.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Apointment(string id)
+        public ActionResult Apointment(int id)
+        {
+            var appointment = this._contex.Appointments.FirstOrDefault(a => a.Id == id);
+
+            return this.View(appointment);
+        }
+
+        [HttpPost]
+        public ActionResult Apointment(Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                this._contex.Entry(appointment).State = EntityState.Modified;
+                this._contex.SaveChanges();
+                ViewBag.Status = true;
+                ViewBag.Message = "Appointment Completed";
+                return Redirect("~/patient");
+            }
+            else
+            {
+                ViewBag.Status = false;
+                ViewBag.Message = "Error !! try again";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Accept(string id)
         {
             if (id == null)
             {
@@ -319,7 +348,7 @@ namespace Doctor.Controllers
         }
 
         [HttpPost]
-        public ActionResult Apointment(Appointment appointment, int id, int pId)
+        public ActionResult Accept(Appointment appointment, int id, int pId)
         {
             appointment.PatientId = pId;
             appointment.DoctorsId = id;

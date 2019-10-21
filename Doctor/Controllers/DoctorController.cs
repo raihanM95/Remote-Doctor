@@ -341,6 +341,30 @@ namespace Doctor.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Accept(string Id)
+        {
+            if (Id != null)
+            {
+                try
+                {
+                    int id = Convert.ToInt32(Id);
+                    Appointment appointment = this._contex.Appointments.FirstOrDefault(a => a.Id == id);
+                    appointment.AcceptStatus = true;
+                    this._contex.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception x)
+                {
+                    return Json(x);
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
         public ActionResult Chat()
         {
             if (this.GetCurrentDoctor() != null)

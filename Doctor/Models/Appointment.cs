@@ -20,15 +20,17 @@ namespace Doctor.Models
         [Display(Name = "Blood Pressure ")]
         public string BP { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
+        //[Required(AllowEmptyStrings = false)]
         [Display(Name = "Your Problem Description ")]
         public string Problem { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = ("Your Weight?"))]
         public string Weight { get; set; }
 
         public bool Status { get; set; }
+
+        public bool AcceptStatus { get; set; }
 
         public virtual Doctors Doctors { get; set; }
         public int DoctorsId { get; set; }

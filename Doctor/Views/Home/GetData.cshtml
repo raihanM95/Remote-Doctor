@@ -18,7 +18,7 @@
 
                     <h5 class="card-title">{{d.DoctorName | uppercase}}</h5>
                     <p class="card-text">{{d.DoctorDegree}}</p>
-                    <a class="btn btn-outline-success mx-auto d-block" ng-href="@Url.Action("Apointment","Patient")/{{d.Id}}">Appointment</a>
+                    <a class="btn btn-outline-success mx-auto d-block" ng-href="@Url.Action("Accept","Patient")/{{d.Id}}">Appointment</a>
                 </div>
             </div>
         </div>

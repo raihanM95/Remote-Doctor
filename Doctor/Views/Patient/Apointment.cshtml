@@ -1,4 +1,4 @@
-﻿@model Doctor.ViewModel.AppointmentView
+﻿@model Doctor.Models.Appointment
 @{
     ViewBag.Title = "Apointment";
 }
@@ -11,42 +11,46 @@
             {
                 <div class="alert-danger"><h5>@ViewBag.Message</h5></div>
             }
-            <div class="card text-center mx-auto d-block" style="width: 18rem;">
+            @*<div class="card text-center mx-auto d-block" style="width: 18rem;">
                 <img class="card-img-top" src="@Url.Content(Model.Doctorses.DoctorImagePath)" alt="Card image cap">
                 <div class="card-body">
 
                     <h5 class="card-title">@Model.Doctorses.DoctorName</h5>
                     <p class="card-text">@Model.Doctorses.DoctorDegree</p>
                 </div>
-            </div>
+            </div>*@
             <h3 class="h1 text-center"> Information </h3>
-            @using (Html.BeginForm("Apointment", "Patient", new { @id = Model.Doctorses.Id, @pId = @Model.Patient.Id }))
+            @using (Html.BeginForm("Apointment", "Patient"))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Appointment.BP)
-                    @Html.TextBoxFor(model => model.Appointment.BP, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Appointment.BP, "", new { @class = "text-danger" })
-                </div>
+                
+                @Html.HiddenFor(model => model.Id)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Appointment.Problem)
-                    @Html.TextAreaFor(model => model.Appointment.Problem, new { @class = "form-control", @placeholder = "Enter your problem" })
-                    @Html.ValidationMessageFor(model => model.Appointment.Problem, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.BP)
+                    @Html.TextBoxFor(model => model.BP, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BP, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Appointment.Weight)
+                    @Html.LabelFor(model => model.Problem)
+                    @Html.TextAreaFor(model => model.Problem, new { @class = "form-control", @placeholder = "Enter your problem" })
+                    @Html.ValidationMessageFor(model => model.Problem, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Weight)
+                    @Html.TextBoxFor(model => model.Weight, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RunningMedicine)
+                    @Html.CheckBoxFor(model => model.RunningMedicine, new { @class = "ml-xl-5" })
+                </div>
+                
+                @Html.HiddenFor(model => model.Date)
+                @Html.HiddenFor(model => model.DoctorsId)
+                @Html.HiddenFor(model => model.PatientId)
 
-                    @Html.TextBoxFor(model => model.Appointment.Weight, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Appointment.Weight, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Appointment.RunningMedicine)
-                    @Html.CheckBoxFor(model => model.Appointment.RunningMedicine, new { @class = "ml-xl-5" })
-                </div>
                 <div class="form-group">
                     <input type="submit" value="Make your Appointment" class="btn btn-outline-success mx-auto d-block" />
                 </div>

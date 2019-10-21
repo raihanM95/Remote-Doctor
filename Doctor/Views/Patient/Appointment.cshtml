@@ -18,9 +18,13 @@
                     <td>@m.Doctors.DoctorName</td>
                     <td>@m.Problem</td>
                     <td>
-                        @if (m.Status == false)
+                        @if (m.Status == false && m.AcceptStatus == false)
                         {
-                            <span class="badge badge-danger">Not done</span>
+                            <span class="badge badge-warning">Pending</span>
+                        }
+                        else if (m.Status == false && m.AcceptStatus == true)
+                        {
+                            <button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Apointment","Patient", new {@id=m.Id})'">Submit</button>
                         }
                         else
                         {
