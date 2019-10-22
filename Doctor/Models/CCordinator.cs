@@ -42,7 +42,7 @@ namespace Doctor.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         [MinLength(6, ErrorMessage = "Password minimum 6 character required")]
-        [Compare("CCordinatorPassword", ErrorMessage = "Password Doesn't Match")]
+        [Compare("CCordinatorPassword", ErrorMessage = "Password doesn't match")]
         [NotMapped]
         public string CCordinatorConfirmPassword { get; set; }
 

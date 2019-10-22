@@ -12,7 +12,7 @@ namespace Doctor.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Enter Name")]
         public string DoctorName { get; set; }
 
@@ -38,7 +38,7 @@ namespace Doctor.Models
         [StringLength(200)]
         public string DoctorDegree { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Registration No")]
         public string RegNo { get; set; }
 
@@ -58,7 +58,7 @@ namespace Doctor.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         [MinLength(6, ErrorMessage = "Password minimum 6 character required")]
-        [Compare("DoctorPassword", ErrorMessage = "Password Doesn't Match")]
+        [Compare("DoctorPassword", ErrorMessage = "Password doesn't match")]
         [NotMapped]
         public string DoctorConfirmPassword { get; set; }
 

@@ -11,12 +11,12 @@ namespace Doctor.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Medicine Name")]
         [Required]
+        [Display(Name = "Medicine Name")]
         public string Name { get; set; }
 
-        [Display(Name = "MG/ML")]
         [Required]
+        [Display(Name = "MG/ML")]
         public double Amount { get; set; }
 
         [Required]

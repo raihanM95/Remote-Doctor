@@ -14,15 +14,15 @@ namespace Doctor.Models
         /// <summary>
         /// Gets or sets the email.
         /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [Display(Name = "Email")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email Required")]
         public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the password.
         /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
         [Display(Name = "Password")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Password Required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

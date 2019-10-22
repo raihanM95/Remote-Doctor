@@ -47,7 +47,7 @@
                 <th>Patient Name</th>
                 
                 <th>Status</th>
-                <th></th>
+                <th>Time</th>
             </tr>
             @foreach (var a in Model)
             {
@@ -72,6 +72,8 @@
                             <td>
                                 @using (Html.BeginForm("Accept", "Doctor", new { id = a.Id }, FormMethod.Post, new { @class = "" }))
                                 {
+                                    <input type="time" name="usr_time" class="form-control" style="width:110px">
+                                    <br />
                                     <button id="motif" type="submit" class="btn btn-outline-success">Accept</button>
                                 }
                                 @*<button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Accept","Doctor",new {@id=a.Id})'">Accept</button>*@

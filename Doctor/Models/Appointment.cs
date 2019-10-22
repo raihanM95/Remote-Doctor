@@ -14,18 +14,18 @@ namespace Doctor.Models
 
         public DateTime? Date { get; set; }
 
-        [Display(Name = "Running any Medicine?")]
+        [Display(Name = "Running any medicine?")]
         public bool RunningMedicine { get; set; }
 
-        [Display(Name = "Blood Pressure ")]
+        [Display(Name = "Your Blood Pressure")]
         public string BP { get; set; }
 
         //[Required(AllowEmptyStrings = false)]
-        [Display(Name = "Your Problem Description ")]
+        [Display(Name = "Your problem description")]
         public string Problem { get; set; }
 
-        //[Required]
-        [Display(Name = ("Your Weight?"))]
+        //[Required(AllowEmptyStrings = false)]
+        [Display(Name = ("Your Weight"))]
         public string Weight { get; set; }
 
         public bool Status { get; set; }

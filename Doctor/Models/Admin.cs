@@ -35,7 +35,7 @@ namespace Doctor.Models
         //[DataType(DataType.Password)]
         //[Display(Name = "Confirm Password")]
         //[MinLength(6, ErrorMessage = "Password minimum 6 character required")]
-        //[Compare("Password", ErrorMessage = "Password Doesn't Match")]
+        //[Compare("Password", ErrorMessage = "Password doesn't match")]
         //[NotMapped]
         //public string ConfirmPassword { get; set; }
 
