@@ -20,7 +20,7 @@ namespace Doctor.Models
         public string DoctorImagePath { get; set; }
 
         [NotMapped]
-        [Required]
+        //[Required]
         public HttpPostedFileBase DoctorImagefile { get; set; }
 
         [Required]

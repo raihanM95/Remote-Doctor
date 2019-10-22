@@ -434,6 +434,7 @@ namespace Doctor.Controllers
             ModelState["DoctorPassword"].Errors.Clear();
             ModelState["DoctorConfirmPassword"].Errors.Clear();
             ModelState["RegNo"].Errors.Clear();
+            ModelState["DoctorBirthDate"].Errors.Clear();
             doctor.DoctorBirthDate = Doctor.DoctorBirthDate;
             doctor.RegNo = Doctor.RegNo;
             doctor.DoctorPassword = Doctor.DoctorPassword;
@@ -454,17 +455,17 @@ namespace Doctor.Controllers
                 {
                     doctor.DoctorImagePath = Doctor.DoctorImagePath;
                 }
-                //Doctor.DoctorName = doctor.DoctorName;
-                //Doctor.DoctorImagePath = doctor.DoctorImagePath;
-                //Doctor.DoctorBirthDate = doctor.DoctorBirthDate;
-                //Doctor.DoctorEmail = doctor.DoctorEmail;
-                //Doctor.DoctorDegree = doctor.DoctorDegree;
-                //Doctor.RegNo = doctor.RegNo;
-                //Doctor.DoctorDetails = doctor.DoctorDetails;
-                //Doctor.DoctorPassword = doctor.DoctorPassword;
-                //Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
-                //Doctor.DepartmentId = doctor.DepartmentId;
-                this._contex.Entry(doctor).State = EntityState.Modified;
+                Doctor.DoctorName = doctor.DoctorName;
+                Doctor.DoctorImagePath = doctor.DoctorImagePath;
+                Doctor.DoctorBirthDate = doctor.DoctorBirthDate;
+                Doctor.DoctorEmail = doctor.DoctorEmail;
+                Doctor.DoctorDegree = doctor.DoctorDegree;
+                Doctor.RegNo = doctor.RegNo;
+                Doctor.DoctorDetails = doctor.DoctorDetails;
+                Doctor.DoctorPassword = doctor.DoctorPassword;
+                Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
+                Doctor.DepartmentId = doctor.DepartmentId;
+                //this._contex.Entry(doctor).State = EntityState.Modified;
                 this._contex.SaveChanges();
             }
             return RedirectToAction("Index", "Doctor");
