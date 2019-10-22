@@ -5,24 +5,27 @@
         <h3 class="h3 text-center pb-md-2">LAST 5 APPOINTMENT</h3>
         <table class="table table-hover">
             <tr>
-                <th>Date</th>
                 <th>Doctor Name</th>
+                <th>Date & Time</th>
                 <th>Problem</th>
                 <th>Status</th>
-
             </tr>
             @foreach (var m in Model)
             {
                 <tr>
-                    <td>@m.Date</td>
                     <td>@m.Doctors.DoctorName</td>
+                    <td>@m.AppointmentDate @m.AppointmentTime</td>
                     <td>@m.Problem</td>
                     <td>
-                        @if (m.Status == false && m.AcceptStatus == false)
+                        @if (m.Problem == null && m.Status == false && m.AcceptStatus == false)
                         {
                             <span class="badge badge-warning">Pending</span>
                         }
-                        else if (m.Status == false && m.AcceptStatus == true)
+                        else if (m.Problem != null && m.Status == false && m.AcceptStatus == true)
+                        {
+                            <span class="badge badge-info">Waiting</span>
+                        }
+                        else if (m.Problem == null && m.AcceptStatus == true)
                         {
                             <button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Apointment","Patient", new {@id=m.Id})'">Submit</button>
                         }

@@ -10,10 +10,12 @@ namespace Doctor
     public class Email
     {
         public static void SendVarificationEmail(string Email, string link)
-        {            
-            var fromEmail = new MailAddress("remote.doctor@gmail.com", "Remote Doctor");
+        {
+            //var fromEmail = new MailAddress("remote.doctor@gmail.com", "Remote Doctor");
+            var fromEmail = new MailAddress("raihan35-1542@diu.edu.bd", "Remote Doctor");
             var ToEmail = new MailAddress(Email);
-            var FormEmailPass = "********";
+            //var FormEmailPass = "********";
+            var FormEmailPass = "1016237381";
             string Subject = "Your Account Successfully Created";
 
             string body = "<br><br><br><b>Welcome!!</b>  <br>" +

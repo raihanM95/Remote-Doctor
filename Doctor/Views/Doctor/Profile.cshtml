@@ -27,6 +27,7 @@
                                 <li class="list-group-item">Degree</li>
                                 @*<li class="list-group-item">Department</li>*@
                                 <li class="list-group-item">Details</li>
+                                <li class="list-group-item">Available time</li>
                             </ul>
                         </div>
                         <div class="col">
@@ -38,6 +39,7 @@
                                 <li class="list-group-item">@Model.DoctorDegree</li>
                                 @*<li class="list-group-item">@Model.Department.DeptName</li>*@
                                 <li class="list-group-item">@Model.DoctorDetails</li>
+                                <li class="list-group-item">@Model.StartTime - @Model.EndTime</li>
                             </ul>
                         </div>
                     </div>
@@ -87,6 +89,20 @@
                         </div>
                         <div class="form-group">
                             @Html.TextAreaFor(dr => dr.DoctorDetails, new { @class = "form-control", @placeholder = "Details of Specialties, Experience and Expertise" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(dr => dr.StartTime)
+
+                            <div class="row">
+                                <div class="col">
+                                    @Html.TextBoxFor(dr => dr.StartTime, new { type = "time", @class = "form-control" })
+                                    @Html.ValidationMessageFor(dr => dr.StartTime, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.TextBoxFor(dr => dr.EndTime, new { type = "time", @class = "form-control" })
+                                    @Html.ValidationMessageFor(dr => dr.EndTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                         <button class="btn btn-outline-success" type="submit">Update</button>
                     }

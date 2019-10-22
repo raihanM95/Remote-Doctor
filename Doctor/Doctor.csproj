@@ -191,6 +191,26 @@
     <Compile Include="Migrations\201910201132579_Appointment.Designer.cs">
       <DependentUpon>201910201132579_Appointment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910221418154_AvailableAddedDoctorModel.cs" />
+    <Compile Include="Migrations\201910221418154_AvailableAddedDoctorModel.Designer.cs">
+      <DependentUpon>201910221418154_AvailableAddedDoctorModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221446035_DoctorAvailableTimeAddedDoctorModel.cs" />
+    <Compile Include="Migrations\201910221446035_DoctorAvailableTimeAddedDoctorModel.Designer.cs">
+      <DependentUpon>201910221446035_DoctorAvailableTimeAddedDoctorModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221856052_TimeCCEmailAddedAppointmentModel.cs" />
+    <Compile Include="Migrations\201910221856052_TimeCCEmailAddedAppointmentModel.Designer.cs">
+      <DependentUpon>201910221856052_TimeCCEmailAddedAppointmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221945053_AppointmentScheduleAddedAppointmentModel.cs" />
+    <Compile Include="Migrations\201910221945053_AppointmentScheduleAddedAppointmentModel.Designer.cs">
+      <DependentUpon>201910221945053_AppointmentScheduleAddedAppointmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221956346_ChangedDateTypeAppointmentModel.cs" />
+    <Compile Include="Migrations\201910221956346_ChangedDateTypeAppointmentModel.Designer.cs">
+      <DependentUpon>201910221956346_ChangedDateTypeAppointmentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\CCordinator.cs" />
@@ -1560,14 +1580,11 @@
     <Content Include="Views\Patient\Deshboard.cshtml" />
     <Content Include="Views\Patient\Reports.cshtml" />
     <Content Include="Views\Patient\Perescription.cshtml" />
-    <Content Include="Views\Patient\History.cshtml" />
     <Content Include="Views\Home\GetData.cshtml" />
     <Content Include="Views\Home\Doctor.cshtml" />
-    <Content Include="Views\Doctor\Chat.cshtml" />
     <Content Include="Views\Doctor\Patient.cshtml" />
     <Content Include="Views\Doctor\Profile.cshtml" />
     <Content Include="Views\Doctor\Deshboard.cshtml" />
-    <Content Include="Views\Doctor\History.cshtml" />
     <Content Include="Views\Patient\Apointment.cshtml" />
     <Content Include="Views\Patient\Appointment.cshtml" />
     <Content Include="Views\Doctor\Appointment.cshtml" />
@@ -1624,6 +1641,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910201132579_Appointment.resx">
       <DependentUpon>201910201132579_Appointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221418154_AvailableAddedDoctorModel.resx">
+      <DependentUpon>201910221418154_AvailableAddedDoctorModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221446035_DoctorAvailableTimeAddedDoctorModel.resx">
+      <DependentUpon>201910221446035_DoctorAvailableTimeAddedDoctorModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221856052_TimeCCEmailAddedAppointmentModel.resx">
+      <DependentUpon>201910221856052_TimeCCEmailAddedAppointmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221945053_AppointmentScheduleAddedAppointmentModel.resx">
+      <DependentUpon>201910221945053_AppointmentScheduleAddedAppointmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221956346_ChangedDateTypeAppointmentModel.resx">
+      <DependentUpon>201910221956346_ChangedDateTypeAppointmentModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

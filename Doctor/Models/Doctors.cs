@@ -48,6 +48,16 @@ namespace Doctor.Models
         public string DoctorDetails { get; set; }
 
         [Required(AllowEmptyStrings = false)]
+        [StringLength(20)]
+        [Display(Name = "Available time")]
+        public string StartTime { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(20)]
+        //[Display(Name = "Available time")]
+        public string EndTime { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         [StringLength(200)]

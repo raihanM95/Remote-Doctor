@@ -21,7 +21,7 @@
             }
             else
             {
-                using (Html.BeginForm())
+                using (Html.BeginForm("New", "Patient", FormMethod.Post, new { @encType = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 

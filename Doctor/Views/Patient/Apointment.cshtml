@@ -12,19 +12,19 @@
                 <div class="alert-danger"><h5>@ViewBag.Message</h5></div>
             }
             @*<div class="card text-center mx-auto d-block" style="width: 18rem;">
-                <img class="card-img-top" src="@Url.Content(Model.Doctorses.DoctorImagePath)" alt="Card image cap">
-                <div class="card-body">
+            <img class="card-img-top" src="@Url.Content(Model.Doctorses.DoctorImagePath)" alt="Card image cap">
+            <div class="card-body">
 
-                    <h5 class="card-title">@Model.Doctorses.DoctorName</h5>
-                    <p class="card-text">@Model.Doctorses.DoctorDegree</p>
-                </div>
-            </div>*@
+                <h5 class="card-title">@Model.Doctorses.DoctorName</h5>
+                <p class="card-text">@Model.Doctorses.DoctorDegree</p>
+            </div>
+        </div>*@
             <h3 class="h1 text-center"> Information </h3>
             @using (Html.BeginForm("Apointment", "Patient"))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                
+
                 @Html.HiddenFor(model => model.Id)
 
                 <div class="form-group">
@@ -46,8 +46,11 @@
                     @Html.LabelFor(model => model.RunningMedicine)
                     @Html.CheckBoxFor(model => model.RunningMedicine, new { @class = "ml-xl-5" })
                 </div>
-                
+
                 @Html.HiddenFor(model => model.Date)
+                @Html.HiddenFor(model => model.AcceptStatus)
+                @Html.HiddenFor(model => model.AppointmentDate)
+                @Html.HiddenFor(model => model.AppointmentTime)
                 @Html.HiddenFor(model => model.DoctorsId)
                 @Html.HiddenFor(model => model.PatientId)
 

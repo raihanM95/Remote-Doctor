@@ -10,6 +10,7 @@ namespace Doctor.ViewModel
     {
         public Doctors Doctorses { get; set; }
         public Appointment Appointment { get; set; }
+        public IEnumerable<Appointment> Appointments { get; set; }
         public Patient Patient { get; set; }
     }
 }

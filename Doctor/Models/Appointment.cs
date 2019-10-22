@@ -32,6 +32,19 @@ namespace Doctor.Models
 
         public bool AcceptStatus { get; set; }
 
+        [Display(Name = "Appointment Time")]
+        [StringLength(20)]
+        public string AppointmentTime { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
+        public DateTime AppointmentDate { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string CCEmail { get; set; }
+
         public virtual Doctors Doctors { get; set; }
         public int DoctorsId { get; set; }
         public virtual Patient Patient { get; set; }

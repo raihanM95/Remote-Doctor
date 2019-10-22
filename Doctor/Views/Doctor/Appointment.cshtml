@@ -1,6 +1,7 @@
-﻿@model IEnumerable<Doctor.Models.Appointment>
+﻿@model Doctor.ViewModel.AppointmentView
 <div class="row">
     <div class="col-md p-xl-4 shadow-lg p-3 mb-5 bg-white rounded ml-xl-5 mt-xl-3">
+        <h5>Treatment Requests</h5>
         <table class="table table-hover">
             <tr>
                 <th>Patient Name</th>
@@ -9,76 +10,67 @@
                 <th>Previous  Medicine</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
             </tr>
-            @foreach (var a in Model)
+            @foreach (var a in Model.Appointments)
             {
                 //string problem = a.Problem.Length < 40 ? a.Problem : a.Problem.Substring(0, 40);
-                <tr onclick="">
-                    @if(a.Problem != null)
+        <tr onclick="">
+            @if (a.Problem != null)
+            {
+                string problem = a.Problem.Length < 40 ? a.Problem : a.Problem.Substring(0, 40);
+                <td>@a.Patient.PatientName</td>
+                <td>@problem</td>
+                <td>@a.BP</td>
+                <td>@a.RunningMedicine</td>
+                <td>
+                    @if (a.Status == false)
                     {
-                        string problem = a.Problem.Length < 40 ? a.Problem : a.Problem.Substring(0, 40);
-                        <td>@a.Patient.PatientName</td>
-                        <td>@problem</td>
-                        <td>@a.BP</td>
-                        <td>@a.RunningMedicine</td>
-                        <td>
-                            @if (a.Status == false)
-                            {
-                                <span class="badge badge-danger">Not done</span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-success">Success</span>
-                            }
-                        </td>
-                        if (a.Status == false)
-                        {
-                            <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Prescription","Doctor",new {@id=a.Id})'">Solution</button></td>
-                        }
+                        <span class="badge badge-danger">Not done</span>
                     }
-                    
-                </tr>
+                    else
+                    {
+                        <span class="badge badge-success">Success</span>
+                    }
+                </td>
+                if (a.Status == false)
+                {
+                    <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Prescription","Doctor",new {@id=a.Id})'">Solution</button></td>
+                    <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("","",new {@id=a.Id})'">Refer</button></td>
+                }
+            }
+
+        </tr>
             }
         </table>
     </div>
     <div class="col-md p-xl-4 shadow-lg p-3 mb-5 bg-white rounded ml-xl-5 mt-xl-3">
+        <h5>Appointment Requests</h5>
         <table class="table table-hover">
             <tr>
                 <th>Patient Name</th>
-                
+                <th>Date</th>
                 <th>Status</th>
-                <th>Time</th>
+                <th></th>
             </tr>
-            @foreach (var a in Model)
+            @foreach (var a in Model.Appointments)
             {
                 //string problem = a.Problem.Length < 40 ? a.Problem : a.Problem.Substring(0, 40);
                 <tr onclick="">
                     @if (a.Problem == null)
                     {
                         <td>@a.Patient.PatientName</td>
-                        
+                        <td>@a.Date</td>
                         <td>
-                            @if (a.Status == false)
+                            @if (a.AcceptStatus == true)
                             {
                                 <span class="badge badge-warning">Pending</span>
                             }
                             else
                             {
-                                <span class="badge badge-success">Success</span>
+                                <input onclick="GetId(@a.Id)" type="submit" value="Accept" class="btn btn-outline-success" data-toggle="modal" data-target="#AcceptModal" />
                             }
                         </td>
-                        if (a.AcceptStatus == false)
-                        {
-                            <td>
-                                @using (Html.BeginForm("Accept", "Doctor", new { id = a.Id }, FormMethod.Post, new { @class = "" }))
-                                {
-                                    <input type="time" name="usr_time" class="form-control" style="width:110px">
-                                    <br />
-                                    <button id="motif" type="submit" class="btn btn-outline-success">Accept</button>
-                                }
-                                @*<button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Accept","Doctor",new {@id=a.Id})'">Accept</button>*@
-                            </td>
-                        }
                     }
 
                 </tr>
@@ -86,3 +78,47 @@
         </table>
     </div>
 </div>
+
+<div class="modal fade" id="AcceptModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Appointment Schedule</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Accept", "Doctor", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(dr => dr.Appointment.Id, new { @id = "Aid" })
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(dr => dr.Appointment.AppointmentDate)
+
+                        @Html.EditorFor(dr => dr.Appointment.AppointmentDate, "{0:d mm yyyy}", new { htmlAttributes = new { @class = "form-control", required = "Enter date", type = "Date" } })
+                        @Html.ValidationMessageFor(dr => dr.Appointment.AppointmentDate, "", new { @class = "text-danger" })
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(dr => dr.Appointment.AppointmentTime)
+
+                        @Html.TextBoxFor(dr => dr.Appointment.AppointmentTime, new { type = "time", @class = "form-control", required = "Enter time" })
+                        @Html.ValidationMessageFor(dr => dr.Appointment.AppointmentDate, "", new { @class = "text-danger" })
+                    </div>
+                    <button class="btn btn-outline-success" type="submit">Set Appointment</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var id;
+    function GetId(e) {
+        id = e;
+        $("#Aid").val(id);
+    } 
+</script>

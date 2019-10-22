@@ -333,7 +333,12 @@ namespace Doctor.Controllers
             {
                 var appointment = this._contex.Appointments.Include("Patient").OrderByDescending(a => a.Id)
                     .Where(a => a.DoctorsId == doctor.Id).Take(10);
-                return this.PartialView(appointment);
+
+                var appointmentView = new AppointmentView
+                {
+                    Appointments = appointment
+                };
+                return this.PartialView(appointmentView);
             }
             else
             {
@@ -342,15 +347,17 @@ namespace Doctor.Controllers
         }
 
         [HttpPost]
-        public ActionResult Accept(string Id)
+        public ActionResult Accept(Appointment appointment)
         {
-            if (Id != null)
+            if (appointment.Id != 0)
             {
                 try
                 {
-                    int id = Convert.ToInt32(Id);
-                    Appointment appointment = this._contex.Appointments.FirstOrDefault(a => a.Id == id);
-                    appointment.AcceptStatus = true;
+                    //int id = Convert.ToInt32(Id);
+                    Appointment aAppointment = this._contex.Appointments.FirstOrDefault(a => a.Id == appointment.Id);
+                    aAppointment.AcceptStatus = true;
+                    aAppointment.AppointmentDate = appointment.AppointmentDate;
+                    aAppointment.AppointmentTime = appointment.AppointmentTime;
                     this._contex.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -462,6 +469,8 @@ namespace Doctor.Controllers
                 Doctor.DoctorDegree = doctor.DoctorDegree;
                 Doctor.RegNo = doctor.RegNo;
                 Doctor.DoctorDetails = doctor.DoctorDetails;
+                Doctor.StartTime = doctor.StartTime;
+                Doctor.EndTime = doctor.EndTime;
                 Doctor.DoctorPassword = doctor.DoctorPassword;
                 Doctor.DoctorConfirmPassword = doctor.DoctorConfirmPassword;
                 Doctor.DepartmentId = doctor.DepartmentId;

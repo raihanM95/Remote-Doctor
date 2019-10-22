@@ -75,6 +75,21 @@
                     </div>
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.Doctors.StartTime)
+
+                        <div class="row">
+                            <div class="col">
+                                @Html.TextBoxFor(model => model.Doctors.StartTime, new { type = "time", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Doctors.StartTime, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col">
+                                @Html.TextBoxFor(model => model.Doctors.EndTime, new { type = "time", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Doctors.EndTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.Doctors.DepartmentId)<br />
 
                         @Html.DropDownListFor(model => model.Doctors.DepartmentId, new SelectList(Model.Departments, "Id", "deptName"), "Select Department", new { @class = "form-control" })
