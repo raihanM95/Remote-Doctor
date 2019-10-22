@@ -353,11 +353,62 @@ namespace Doctor.Controllers
             {
                 try
                 {
-                    //int id = Convert.ToInt32(Id);
                     Appointment aAppointment = this._contex.Appointments.FirstOrDefault(a => a.Id == appointment.Id);
                     aAppointment.AcceptStatus = true;
                     aAppointment.AppointmentDate = appointment.AppointmentDate;
                     aAppointment.AppointmentTime = appointment.AppointmentTime;
+                    this._contex.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception x)
+                {
+                    return Json(x);
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Refer(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                try
+                {
+                    int Id = Convert.ToInt32(id);
+                    var appointment = this._contex.Appointments.Single(p => p.Id == Id);
+                    var doctors = this._contex.Doctorses.ToList();
+
+                    var referView = new ReferView
+                    {
+                        Doctors = doctors,
+                        Appointment = appointment
+                    };
+                    return this.View(referView);
+                }
+                catch (Exception)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Refer(int id, int dId)
+        {
+            if (id != 0)
+            {
+                try
+                {
+                    Appointment aAppointment = this._contex.Appointments.FirstOrDefault(a => a.Id == id);
+                    aAppointment.DoctorsId = dId;
                     this._contex.SaveChanges();
                     return RedirectToAction("Index");
                 }

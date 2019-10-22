@@ -36,7 +36,7 @@
                 if (a.Status == false)
                 {
                     <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Prescription","Doctor",new {@id=a.Id})'">Solution</button></td>
-                    <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("","",new {@id=a.Id})'">Refer</button></td>
+                    <td><button id="motif" class="btn btn-outline-success" onclick="location.href = '@Url.Action("Refer","Doctor",new {@id=a.Id})'">Refer</button></td>
                 }
             }
 

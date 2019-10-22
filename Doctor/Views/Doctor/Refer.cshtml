@@ -1,0 +1,35 @@
+﻿@model Doctor.ViewModel.ReferView
+@{
+    ViewBag.Title = "Refer";
+}
+@Html.Partial("_nav");
+<div class="container text-center">
+    <h3 class="mt-xl-3">Doctors List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Degree</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var dr in Model.Doctors)
+        {
+            <tr>
+                <td>@dr.DoctorName</td>
+                <td>@dr.DoctorEmail</td>
+                <td>@dr.DoctorDegree</td>
+                <td>
+                    @using (Html.BeginForm("Refer", "Doctor", new { @id = @Model.Appointment.Id, @dId = @dr.Id }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <input type="submit" value="Refer" class="btn btn-outline-success" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

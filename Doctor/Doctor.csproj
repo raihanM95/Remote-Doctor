@@ -244,6 +244,7 @@
     <Compile Include="ViewModel\DoctorView.cs" />
     <Compile Include="ViewModel\PatientView.cs" />
     <Compile Include="ViewModel\PrescriptonView.cs" />
+    <Compile Include="ViewModel\ReferView.cs" />
     <Compile Include="ViewModel\SloliutionView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1612,6 +1613,7 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Patient\Accept.cshtml" />
+    <Content Include="Views\Doctor\Refer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
