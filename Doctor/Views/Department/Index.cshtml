@@ -1,0 +1,59 @@
+﻿@model Doctor.ViewModel.DepartmentView
+<p style="margin-top:20px; margin-left:20px">
+    <button class="btn btn-info" data-toggle="modal" data-target="#AddModal"><span class="fa fa-user-plus admin-action-icon"></span> Add Department</button>
+</p>
+<div class="container text-center">
+    <h3 class="mt-xl-3">Departments List</h3>
+    <table class="table table-active">
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+        @foreach (var dept in Model.Departments)
+        {
+            <tr>
+                <td>@dept.DeptName</td>
+                <td>@dept.DeptDetails</td>
+                
+                <td>
+                    <p class="btn btn-danger btn-sm admin-action-btn"><span class="fa fa-trash admin-action-icon"></span>@Html.ActionLink(" Delete", "Delete", new { id = dept.Id }, new { @class = "admin-action", onclick = "return confirm('Are sure wants to delete?');" })</p>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="modal fade" id="AddModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle">Add Department</h4>
+                <a href="#" data-dismiss="modal" class="close">&times;</a>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Department.DeptName)
+
+                        @Html.EditorFor(model => model.Department.DeptName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter department name" } })
+                        @Html.ValidationMessageFor(model => model.Department.DeptName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Department.DeptDetails)
+
+                        @Html.EditorFor(model => model.Department.DeptDetails, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter dept details" } })
+                        @Html.ValidationMessageFor(model => model.Department.DeptDetails, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button class="btn btn-outline-success" type="submit">Save</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

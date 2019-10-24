@@ -211,7 +211,8 @@ namespace Doctor.Controllers
             var doc = this._contex.Doctorses.FirstOrDefault(d => d.DoctorEmail == login.Email);
             if (doc != null)
             {
-                if (string.Compare(Crypto.Hash(login.Password), doc.DoctorPassword) == 0 && doc.IsEmailVarified == true)
+                if (string.Compare(Crypto.Hash(login.Password), doc.DoctorPassword) == 0 
+                    && doc.IsEmailVarified == true)
                 {
                     Status = true;
                     int timeout = login.Remember ? 1440 : 720; // 1440 min = 1 day && 720 min= 12 hour
@@ -226,17 +227,16 @@ namespace Doctor.Controllers
                 else
                 {
                     Meggage = "Account is not verified or Password incorrect!";
-                    return this.View();
                 }
             }
             else
             {
                 Meggage = "This doctor doesn't exist!";
-                return this.View();
             }
 
             ViewBag.Message = Meggage;
             ViewBag.Status = Status;
+            return View();
         }
 
         [HttpPost]
@@ -250,13 +250,13 @@ namespace Doctor.Controllers
 
         public ActionResult Doctors()
         {
-            var Doctor = this._contex.Doctorses.ToList();
-            var department = this._contex.Departments.ToList();
+            var doctors = this._contex.Doctorses.ToList();
+            var departments = this._contex.Departments.ToList();
             
             var DrView = new DoctorView
             {
-                Departments = department,
-                Doctorses = Doctor
+                Departments = departments,
+                Doctorses = doctors
             };
             return PartialView(DrView);
         }

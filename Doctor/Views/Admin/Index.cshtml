@@ -5,7 +5,7 @@
     }
     <div class="Profile">
         <img src="@Url.Content(url)" class="mx-auto d-block" />
-        <h4>@Model.Id</h4>
+        <h4>admin</h4>
         <p>@Model.Email</p>
         
     </div>
@@ -16,6 +16,11 @@
                 <span class="pr-md-4">
                     <i class="fa fa-tachometer" aria-hidden="true"></i>
                 </span>Dashboard
+            </li>
+            <li id="department">
+                <span class="pr-md-4">
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                </span>Departments
             </li>
             <li id="doctor">
                 <span class="pr-md-4">
@@ -32,11 +37,11 @@
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </span>C-Cordinator
             </li>
-            <li id="treatment">
+            @*<li id="treatment">
                 <span class="pr-md-4">
                     <i class="fa fa-stethoscope" aria-hidden="true"></i>
                 </span>Treatment
-            </li>
+            </li>*@
             <li id="transaction">
                 <span class="pr-md-4">
                     <i class="fa fa-money" aria-hidden="true"></i>
@@ -83,6 +88,10 @@
 
         $("#dashboard").click(function () {
             var url= '@Url.Action("Deshboard", "Admin")';
+            $("#loadPartial").load(url);
+        });
+        $("#department").click(function () {
+            var url= '@Url.Action("Index", "Department")';
             $("#loadPartial").load(url);
         });
         $("#doctor").click(function () {

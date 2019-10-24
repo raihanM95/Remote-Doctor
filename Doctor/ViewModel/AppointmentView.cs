@@ -12,5 +12,6 @@ namespace Doctor.ViewModel
         public Appointment Appointment { get; set; }
         public IEnumerable<Appointment> Appointments { get; set; }
         public Patient Patient { get; set; }
+        public CCordinator CCordinator { get; set; }
     }
 }

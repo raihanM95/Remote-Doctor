@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CCordinatorController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="ViewModel\CCordinatorView.cs" />
     <Compile Include="ViewModel\ChatViewForDoctor.cs" />
     <Compile Include="ViewModel\ChatViewForPatient.cs" />
+    <Compile Include="ViewModel\DepartmentView.cs" />
     <Compile Include="ViewModel\DoctorView.cs" />
     <Compile Include="ViewModel\PatientView.cs" />
     <Compile Include="ViewModel\PrescriptonView.cs" />
@@ -1614,6 +1616,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Patient\Accept.cshtml" />
     <Content Include="Views\Doctor\Refer.cshtml" />
+    <Content Include="Views\CCordinator\Doctor.cshtml" />
+    <Content Include="Views\CCordinator\GetAppointment.cshtml" />
+    <Content Include="Views\CCordinator\Accept.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />

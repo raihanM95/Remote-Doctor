@@ -2,6 +2,7 @@
 using Doctor.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -239,7 +240,10 @@ namespace Doctor.Controllers
         [Authorize]
         public ActionResult Deshboard()
         {
-            return PartialView();
+            var user = this.CurrentUser();
+            ViewBag.Appointment = this._contex.Appointments
+                .Where(a => a.Status == false && a.CCEmail == user.CCordinatorEmail).Count();
+            return this.PartialView();
         }
 
         [Authorize]
@@ -285,9 +289,20 @@ namespace Doctor.Controllers
             return RedirectToAction("Index", "CCordinator");
         }
 
+        public ActionResult Doctor()
+        {
+            return this.View();
+        }
+
+        public JsonResult GetAppointment()
+        {
+            var doctor = _contex.Doctorses.ToList();
+            return Json(doctor, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         [HttpGet]
-        public ActionResult Apointment(string id)
+        public ActionResult Accept(string id)
         {
             if (id == null)
             {
@@ -302,37 +317,49 @@ namespace Doctor.Controllers
                     var appoint = new AppointmentView
                     {
                         Doctorses = doctor,
-                        //Patient = CurrentUser(),
+                        CCordinator = CurrentUser(),
                         Appointment = new Appointment()
                     };
                     return this.View(appoint);
                 }
                 catch (Exception)
                 {
-
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 }
             }
         }
 
         [HttpPost]
-        public ActionResult Apointment(Appointment appointment, int id, int pId)
+        public ActionResult Accept(Patient patient, int id, string ccEmail)
         {
-            appointment.PatientId = pId;
-            appointment.DoctorsId = id;
-            appointment.Date = DateTime.Now;
-            if (ModelState.IsValid)
+            Appointment appointment = new Appointment();
+            var aPatient = _contex.Patients.Where(p => p.PatientEmail == patient.PatientEmail).FirstOrDefault();
+            if(aPatient != null)
             {
-                this._contex.Appointments.Add(appointment);
-                this._contex.SaveChanges();
-                ViewBag.Status = true;
-                ViewBag.Message = "Appointment Completed";
-                return Redirect("~/patient");
+                appointment.CCEmail = ccEmail;
+                appointment.PatientId = aPatient.Id;
+                appointment.DoctorsId = id;
+                appointment.Date = DateTime.Now;
+
+                if (id != 0)
+                {
+                    this._contex.Appointments.Add(appointment);
+                    this._contex.SaveChanges();
+                    ViewBag.Status = true;
+                    ViewBag.Message = "Appointment Completed";
+                    return Redirect("~/ccordinator");
+                }
+                else
+                {
+                    ViewBag.Status = false;
+                    ViewBag.Message = "Error !! try again";
+                    return Redirect(Request.UrlReferrer.ToString());
+                }
             }
             else
             {
                 ViewBag.Status = false;
-                ViewBag.Message = "Error !! try again";
+                ViewBag.Message = "This email is not registerd";
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
@@ -340,11 +367,39 @@ namespace Doctor.Controllers
         // Appointment:View
         public ActionResult Appointment()
         {
-            //int id = this.CurrentUser().Id;
-            //var appointments = this._contex.Appointments.Include("Doctors").OrderByDescending(p => p.Id).Where(a => a.PatientId == id).Take(10)
-            //    .ToList();
+            var email = this.CurrentUser().CCordinatorEmail;
+            var appointments = this._contex.Appointments.OrderByDescending(p => p.Id).Where(c => c.CCEmail == email).Take(10)
+                .ToList();
 
-            return this.PartialView(/*appointments*/);
+            return this.PartialView(appointments);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Apointment(int id)
+        {
+            var appointment = this._contex.Appointments.FirstOrDefault(a => a.Id == id);
+
+            return this.View(appointment);
+        }
+
+        [HttpPost]
+        public ActionResult Apointment(Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                this._contex.Entry(appointment).State = EntityState.Modified;
+                this._contex.SaveChanges();
+                ViewBag.Status = true;
+                ViewBag.Message = "Appointment Completed";
+                return Redirect("~/ccordinator");
+            }
+            else
+            {
+                ViewBag.Status = false;
+                ViewBag.Message = "Error !! try again";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
         }
     }
 }

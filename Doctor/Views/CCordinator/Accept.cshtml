@@ -7,10 +7,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5 mx-auto d-block shadow-lg p-3 mb-5 bg-white rounded ">
-            @if (ViewBag.Status == false)
+            @*@if (ViewBag.Status == false)
             {
                 <div class="alert-danger"><h5>@ViewBag.Message</h5></div>
-            }
+            }*@
             <div class="card text-center mx-auto d-block" style="width: 18rem;">
                 <img class="card-img-top" src="@Url.Content(Model.Doctorses.DoctorImagePath)" alt="Card image cap">
                 <div class="card-body">
@@ -20,17 +20,29 @@
                     <p class="card-text">Available time: @Model.Doctorses.StartTime - @Model.Doctorses.EndTime</p>
                 </div>
             </div>
-            @*<h3 class="h1 text-center"> Information </h3>*@
+            <h3 class="h1 text-center"> Information </h3>
             <br />
-            @using (Html.BeginForm("Accept", "Patient", new { @id = Model.Doctorses.Id, @pId = @Model.Patient.Id }))
+            @using (Html.BeginForm("Accept", "CCordinator", new { @id = Model.Doctorses.Id, @ccEmail = @Model.CCordinator.CCordinatorEmail }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Patient.PatientEmail)
+                    @Html.TextBoxFor(model => model.Patient.PatientEmail, new { @class = "form-control", @placeholder = "Enter patient email" })
+                    @Html.ValidationMessageFor(model => model.Patient.PatientEmail, "", new { @class = "text-danger" })
+                </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Make your Appointment" class="btn btn-outline-success mx-auto d-block" />
+                    <input type="submit" value="Make Appointment" class="btn btn-outline-success mx-auto d-block" />
                 </div>
+            }
+            @if (ViewBag.Message != null && ViewBag.Status == false)
+            {
+                <div class="alert-danger rounded">
+                    <a class="text-light">@ViewBag.Message</a>
+                </div>
+
             }
         </div>
     </div>
