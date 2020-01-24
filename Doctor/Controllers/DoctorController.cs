@@ -104,8 +104,8 @@ namespace Doctor.Controllers
                     #region Image file upload
 
                     string fileName = Path.GetFileName(doctors.DoctorImagefile.FileName);
-                    doctors.DoctorImagePath = "/Image/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    doctors.DoctorImagePath = "/Image/doctors/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/doctors/"), fileName);
 
                     #endregion
 
@@ -505,8 +505,8 @@ namespace Doctor.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(doctor.DoctorImagefile.FileName);
                     string Extantion = Path.GetExtension(doctor.DoctorImagefile.FileName);
                     fileName = fileName + DateTime.Now.Year + Extantion;
-                    doctor.DoctorImagePath = "/Image/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    doctor.DoctorImagePath = "/Image/doctors/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/doctors/"), fileName);
                     doctor.DoctorImagefile.SaveAs(fileName);
                 }
                 else

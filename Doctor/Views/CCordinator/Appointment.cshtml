@@ -2,7 +2,7 @@
 @model IEnumerable<Doctor.Models.Appointment>
 <div class="row">
     <div class="col-md p-xl-4 shadow-lg p-3 mb-5 bg-white rounded ml-xl-5 mt-xl-3">
-        <h3 class="h3 text-center pb-md-2">LAST 5 APPOINTMENT</h3>
+        <h3 class="h3 text-center pb-md-2">LAST 10 APPOINTMENT</h3>
         <table class="table table-hover">
             <tr>
                 <th>Doctor Name</th>
@@ -40,6 +40,6 @@
     </div>
     <div class="col-md  shadow-lg p-3 mb-5 bg-white rounded mt-xl-3 mr-xl-5 ml-xl-3">
         <h1 class="h1 text-center">MAKE NEW APPOINTMENT</h1>
-        <a href="@Url.Action("Doctor","CCordinator")"> <img src="~/Image/1919742.png" class="img-fluid mx-auto d-block" height="250px" width="250px" /></a>
+        <a href="@Url.Action("Doctor","CCordinator")"> <img src="~/Image/plus-icon.png" class="img-fluid mx-auto d-block" height="250px" width="250px" /></a>
     </div>
 </div>

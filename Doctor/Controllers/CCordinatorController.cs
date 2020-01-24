@@ -270,8 +270,8 @@ namespace Doctor.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(cCordinator.CCordinatorImagefile.FileName);
                     string Extantion = Path.GetExtension(cCordinator.CCordinatorImagefile.FileName);
                     fileName = fileName + DateTime.Now.Year + Extantion;
-                    cCordinator.CCordinatorImagePath = "/Image/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    cCordinator.CCordinatorImagePath = "/Image/ccordinators/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/ccordinators/"), fileName);
                     cCordinator.CCordinatorImagefile.SaveAs(fileName);
                 }
                 else

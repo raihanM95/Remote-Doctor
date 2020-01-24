@@ -176,6 +176,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Migrations\201909180839259_Doctor_Patient.cs" />
     <Compile Include="Migrations\201909180839259_Doctor_Patient.Designer.cs">
       <DependentUpon>201909180839259_Doctor_Patient.cs</DependentUpon>
@@ -250,10 +251,6 @@
     <Compile Include="ViewModel\SloliutionView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\aspnetdb_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\Doctor.dll" />
@@ -394,6 +391,13 @@
     <Content Include="Image\baseline_search_black_24dp.png" />
     <Content Include="Image\bouncer.jpg" />
     <Content Include="Image\close.png" />
+    <Content Include="Image\doctors\doc-1.jpg" />
+    <Content Include="Image\doctors\doc-2.jpg" />
+    <Content Include="Image\doctors\doc-3.jpg" />
+    <Content Include="Image\doctors\doc-4.jpg" />
+    <Content Include="Image\doctors\doc-5.jpg" />
+    <Content Include="Image\doctors\doc-6.jpg" />
+    <Content Include="Image\doctors\doc-7.jpg" />
     <Content Include="Image\Faq.PNG" />
     <Content Include="Image\home\images\about.jpg" />
     <Content Include="Image\home\images\bg_1.jpg" />
@@ -1620,8 +1624,12 @@
     <Content Include="Views\CCordinator\GetAppointment.cshtml" />
     <Content Include="Views\CCordinator\Accept.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Image\ccordinators\" />
+    <Folder Include="Image\patients\" />
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
     <Folder Include="obj\Release\TempPE\" />
     <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />
@@ -1685,7 +1693,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12227</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12227/</IISUrl>
+          <IISUrl>http://localhost:12228/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,7 +1,7 @@
 ﻿@model Doctor.Models.CCordinator
 <div class="SlideBar">
     @{
-        var url = Model.CCordinatorImagePath ?? "~/Image/pro-avatar.png";
+        var url = Model.CCordinatorImagePath ?? "~/Image/avatar-0.jpg";
     }
     <div class="Profile">
         <img src="@Url.Content(url)" class="mx-auto d-block" />
@@ -86,7 +86,7 @@
             $("#loadPartial").load(url);
         });
         $("#transaction").click(function () {
-            var url= '@Url.Action("Transaction", "Transaction")';
+            var url= '@Url.Action("Index", "Transaction")';
             $("#loadPartial").load(url);
         });
     });

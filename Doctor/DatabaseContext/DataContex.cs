@@ -9,6 +9,10 @@ namespace Doctor
 {
     public class DataContex : DbContext
     {
+        public DataContex() : base("name=MyDbConnection")
+        {
+        }
+
         public DbSet<Admin> Admins { get; set; }
         public DbSet<CCordinator> CCordinators { get; set; }
         public DbSet<Department> Departments { get; set; }

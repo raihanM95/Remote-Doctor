@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--video-call23:30-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <title>Video Call</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">Patient List<a href="#" class="add-user-icon" data-toggle="modal" data-target="#add_chat_user"><i class="fa fa-plus"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="chat-avatar-sm user-img"><img src="assets/img/patient-1.jpg" alt="" class="rounded-circle"><span class="status online"></span></span>Raihan Mahmud<span></span></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="myDIV" class="page-wrapper">
+        <div class="chat-main-row">
+            <div class="chat-main-wrapper">
+                <div class="col-lg-9 message-view chat-view">
+                    <div class="chat-window">
+                        <div class="fixed-header">
+                            <div class="navbar">
+                                <div class="user-details mr-auto">
+                                    <div class="float-left user-img m-r-10">
+                                        <a href="#" title="Raihan Mahmud"><img src="assets/img/patient-1.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                    </div>
+                                    <div class="user-info float-left">
+                                        <a href="#" title="Raihan Mahmud"><span class="font-bold">Raihan Mahmud</span></a>
+                                        <span class="last-seen">Online</span>
+                                    </div>
+                                </div>
+                                <ul class="nav custom-menu">
+                                    <li class="nav-item">
+                                        <a class="task-chat profile-rightbar float-right" href="#chat_sidebar" id="task_chat"><i aria-hidden="true" class="fa fa-comments"></i></a>
+                                    </li>
+                                    <li class="nav-item dropdown dropdown-action">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="javascript:void(0)" class="dropdown-item">Settings</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="chat-contents">
+                            <div class="chat-content-wrap">
+                                <div class="user-video">
+                                    <div id="peerDiv" class="embed-responsive embed-responsive-16by9"></div>
+                                </div>
+                                <div class="my-video">
+                                    <ul>
+                                        <li>
+                                            <div class="embed-responsive embed-responsive-16by9">
+                                                <video class="embed-responsive-item" muted></video>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-footer">
+                            <div class="call-icons">
+                                <span class="call-duration"><label id="minutes">00</label>:<label id="seconds">00</label></span>
+                                <ul class="call-items">
+                                    <li class="call-item">
+                                        <a href="#" title="Enable Video" data-placement="top" data-toggle="tooltip">
+                                            <i class="fa fa-video-camera camera"></i>
+                                        </a>
+                                    </li>
+                                    <li class="call-item">
+                                        <a href="#" title="Mute Audio" data-placement="top" data-toggle="tooltip">
+                                            <i class="fa fa-microphone microphone"></i>
+                                        </a>
+                                    </li>
+                                    <li class="call-item">
+                                        <a href="#" title="Add User" data-placement="top" data-toggle="tooltip">
+                                            <i class="fa fa-user-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="call-item">
+                                        <a href="#" title="Full Screen" data-placement="top" data-toggle="tooltip">
+                                            <i class="fa fa-arrows-v full-screen"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="end-call">
+                                    <a href="feedback.html">End Call</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 message-view chat-profile-view chat-sidebar" id="chat_sidebar">
+                    <div class="chat-window video-window">
+                        <div class="fixed-header">
+                            <ul class="nav nav-tabs nav-tabs-bottom">
+                                <li class="nav-item"><a class="nav-link" href="#chats_tab" data-toggle="tab">Chats</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content chat-contents">
+                            <div class="content-full tab-pane show active" id="calls_tab">
+                                <div class="chat-wrap-inner">
+                                    <div class="chat-box">
+                                        <div class="chats">
+                                            <div class="chat chat-left">
+                                                <div class="chat-avatar">
+                                                    <a href="profile.html" class="avatar">
+                                                        <img alt="John Doe" src="assets/img/user.jpg" class="img-fluid rounded-circle">
+                                                    </a>
+                                                </div>
+                                                <div class="chat chat-left">
+                                                    <div class="chat-avatar">
+                                                        <a href="profile.html" class="avatar">
+                                                            <img alt="John Doe" src="assets/img/user.jpg" class="img-fluid rounded-circle">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-full tab-pane" id="chats_tab">
+                                    <div class="chat-window">
+                                        <div class="chat-contents">
+                                            <div class="chat-content-wrap">
+                                                <div class="chat-wrap-inner">
+                                                    <div class="chat-box">
+                                                        <div class="chats"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-footer">
+                                            <div class="message-bar">
+                                                <div class="message-inner">
+                                                    <a class="link attach-icon" href="#" data-toggle="modal" data-target="#drag_files">
+                                                        <img src="assets/img/attachment.png" alt="">
+                                                    </a>
+                                                    <div class="input-group mb-0">
+                                                        <input type="text" class="form-control msg-send-chat" placeholder="Text . . .">
+                                                        <div class="input-group-append">
+                                                            <input type="file" id="imgupload" style="display:none" />
+                                                            <button id="OpenImgUpload" class="btn btn-secondary btn-icon" type="button" data-toggle="tooltip" title="file attachment"><i class="feather icon-paperclip"></i></button>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-theme btn-icon btn-msg-send" type="button"><i class="feather icon-play"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid" hidden>
+                            <div class="row h-10 w-100">
+                                <div class="col">
+                                    <select id="filter" >
+                                        <option value="none">Normal</option>
+                                        <option value="grayscale(100%)">B & W</option>
+                                        <option value="sepia(100%)">Old School</option>
+                                        <option value="contrast(150%)">Lumination</option>
+                                        <option value="blur(20px)">Hidden Mist</option>
+                                        <option value="invert(100%)">Dracula</option>
+                                        <option value="hue-rotate(180deg">X-men Beast</option>
+                                        <option value="saturate(25)">Super Saiyan God</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <div class="float-right mt-3">
+                                        <input class="form-check-input" type="checkbox" id="theme">
+                                        <label class="form-check-label" for="theme">
+                                            Dark Theme
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row h-90 w-100">
+                                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item" muted></video>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 d-flex justify-content-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime() {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds % 60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            }
+            else {
+                return valString;
+            }
+        }
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bundle.js"></script>
+    <div class="sidebar-overlay" data-reff=""></div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+<!-- video-call23:31-->
+</html>

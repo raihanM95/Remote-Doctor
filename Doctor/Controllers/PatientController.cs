@@ -259,8 +259,8 @@ namespace Doctor.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(patient.PatientImagefile.FileName);
                     string Extantion = Path.GetExtension(patient.PatientImagefile.FileName);
                     fileName = fileName + DateTime.Now.Year + Extantion;
-                    patient.PatientImagePath = "/Image/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    patient.PatientImagePath = "/Image/patients/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/patients/"), fileName);
                     patient.PatientImagefile.SaveAs(fileName);
                 }
                 else
